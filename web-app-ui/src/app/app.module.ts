@@ -14,7 +14,8 @@ import { SignInComponent } from './login/sign-in/sign-in.component';
 import { UserService } from './service/user.service';
 import { LoggerService } from './core/logger.service';
 import { HomeComponent } from './components/home/home.component';
-
+import { NavComponent } from './core/nav/nav.component';
+import{LoggedInAuthGuard} from './guard/logged-in-auth.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HomeComponent } from './components/home/home.component';
     TestComponent,
     Error404Component,
     SignInComponent,
-    HomeComponent
+    HomeComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { HomeComponent } from './components/home/home.component';
     AppBootstrapModule,
     ReactiveFormsModule
   ],
-  providers: [TestService, UserService, LoggerService],
+  providers: [TestService, UserService, LoggerService,LoggedInAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

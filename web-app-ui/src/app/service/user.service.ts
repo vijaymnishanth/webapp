@@ -35,4 +35,13 @@ export class UserService {
       }),
    catchError(error => this.handleError(error)));}
 
+       /**
+     * @name isLoggedIn check user login
+     * @returns {boolean}
+     */
+    isLoggedIn(): boolean {
+      //TODO check is user looged in and return 
+      return localStorage.getItem('userId') !== null;
+  }
+
 }

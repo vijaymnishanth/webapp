@@ -6,11 +6,13 @@ import{TestComponent} from './test/test.component';
 import{SignInComponent} from './login/sign-in/sign-in.component'
 import{HomeComponent} from './components/home/home.component'
 
+import{LoggedInAuthGuard} from './guard/logged-in-auth.guard'
 
 const routes: Routes = [
-  {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: '', component: SignInComponent},
-  {path:AppConfig.routes.home,component:HomeComponent}
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: 'signin', component: SignInComponent},
+  {path:AppConfig.routes.home,component:HomeComponent,canActivate: [LoggedInAuthGuard]
+}
 ];
 
 @NgModule({
