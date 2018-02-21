@@ -64,5 +64,13 @@
             </value>
         </property>
     </bean>
+    
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login"/>
+			<bean class="com.webapp.interceptor.SecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
  
 </beans>

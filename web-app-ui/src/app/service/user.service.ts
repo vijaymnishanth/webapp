@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -14,6 +14,10 @@ export class UserService {
   private headers: HttpHeaders;
   private loginUrl: string;
 
+  role: string;
+
+  userLoggedIn = new EventEmitter<boolean>();
+
   constructor(private http: HttpClient) {
     this.loginUrl = AppConfig.endpoints.login;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -26,22 +30,23 @@ export class UserService {
     return Observable.throw(error || 'backend server error');
   }
 
-  login(user:User): Observable<User>{
+  login(user: User): Observable<User> {
     return this.http
-    .post(this.loginUrl,user, {headers: this.headers}).pipe(
+    .post(this.loginUrl, user, {headers: this.headers}).pipe(
       map(response => {
-        //console.log(response);
+        console.log(response);
+        this.userLoggedIn.emit(true);
         return response;
       }),
-   catchError(error => this.handleError(error)));}
+   catchError(error => this.handleError(error))); }
 
        /**
      * @name isLoggedIn check user login
      * @returns {boolean}
      */
     isLoggedIn(): boolean {
-      //TODO check is user looged in and return 
-      return localStorage.getItem('userId') !== null;
+      // TODO check is user looged in and return
+      return localStorage.getItem('secureToken') !== null;
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { UserService } from '../../service/user.service'
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,11 +10,22 @@ import { UserService } from '../../service/user.service'
 })
 export class NavComponent implements OnInit {
 
-  isLoggedIn:boolean;
-  constructor(private userService: UserService) {}
+  isLoggedIn: boolean;
+  constructor(private userService: UserService,
+    private router: Router) {}
 
   ngOnInit() {
+    this.userService.userLoggedIn.subscribe(
+      (userLoggedIn: boolean) => {
+        this.isLoggedIn = userLoggedIn;
+      }
+    );
     this.isLoggedIn = this.userService.isLoggedIn();
+  }
+
+  addUYP(): boolean {
+    // this.router.navigate(['/', 'uypForm']);
+    return true;
   }
 
 }

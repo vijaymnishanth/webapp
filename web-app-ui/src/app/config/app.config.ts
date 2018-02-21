@@ -11,7 +11,9 @@ export const AppConfig: IAppConfig = {
     error404: '404'
   },
   endpoints: {
-    login: 'http://localhost:8080/web-app/api/login'
+    login: 'http://localhost:8080/web-app/api/login',
+    saveUYP: 'http://localhost:8080/web-app/api/saveUYPForm',
+    findAllUYP: 'http://localhost:8080/web-app/api/findAllUYP'
   },
   endpointsProd: {
     login: 'api/login'

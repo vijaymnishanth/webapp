@@ -4,20 +4,27 @@
           <a class="navbar-brand">
             <img src="assets/img/ngx-bootstrap.svg" class="logo">
           </a>
-          <span class="navbar-brand">Galaxy</span>
+          <span class="navbar-brand">Galaxy Threads</span>
       </div>
       <ul *ngIf="isLoggedIn" class="nav navbar-nav">
-          <li class="active"><a href="#">
+          <li class="active"><a routerLink='/home'>
             Home <span class="sr-only">(current)</span>
           </a></li>
           <li><a href="#">Link</a></li>
           <li class="dropdown" dropdown> <!-- {1} -->
+            <a dropdownToggle role="button"> <!-- {2} -->
+              View <span class="caret"></span></a>
+            <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
+                <li ><a href="#">Undyed Yarn Purchase</a></li>
+                <li><a href="#">Undyed Yarn to Dyeing</a></li>
+            </ul>
+        </li>
+          <li class="dropdown" dropdown> <!-- {1} -->
               <a dropdownToggle role="button"> <!-- {2} -->
-                Dropdown <span class="caret"></span></a>
+                Add <span class="caret"></span></a>
               <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li ><a routerLink='/uypForm' (click)="addUYP()">Undyed Yarn Purchase</a></li>
+                  <li><a href="#">Undyed Yarn to Dyeing</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Separated link</a></li>
                   <li role="separator" class="divider"></li>

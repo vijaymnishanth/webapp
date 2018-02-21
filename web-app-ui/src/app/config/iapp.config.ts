@@ -7,4 +7,3 @@ export interface IAppConfig {
     repositoryURL: string;
     endpointsProd: any;
   }
-  
