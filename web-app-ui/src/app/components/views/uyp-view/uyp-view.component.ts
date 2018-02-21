@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgModel} from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { UndyedYarnPurchase } from '../../../model/undyed-yarn-purchase';
 

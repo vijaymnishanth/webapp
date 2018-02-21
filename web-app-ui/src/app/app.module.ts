@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -38,7 +39,8 @@ import { ViewService } from './service/view.service';
     AppRoutingModule,
     HttpClientModule,
     AppBootstrapModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [TestService, UserService, LoggerService, LoggedInAuthGuard, ErrorService, FormService, ViewService],
   bootstrap: [AppComponent]
