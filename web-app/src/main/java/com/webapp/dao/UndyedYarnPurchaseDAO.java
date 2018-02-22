@@ -6,5 +6,5 @@ import com.webapp.model.UndyedYarnPurchase;
 
 public interface UndyedYarnPurchaseDAO extends CrudRepository<UndyedYarnPurchase, Long> {
 
-	public UndyedYarnPurchase findByUpyId(Long upyId);
+	public UndyedYarnPurchase findByUypId(Long upyId);
 }

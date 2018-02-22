@@ -37,21 +37,30 @@ export class UypViewComponent implements OnInit {
   ngOnInit() {
     this.loadUYPDetails();
     this.formService.uypFormSaved.subscribe((isFormSaved => {
-      if(isFormSaved){
+      if (isFormSaved) {
         this.loadUYPDetails();
       }
     }));
   }
 
-  addUYP(): boolean{
-    this.formType="Add";
+  addUYP(): boolean {
+    this.formType = 'Add';
     this.undyedYarnPurchase = new UndyedYarnPurchase();
     this.formService.uypFormAction.emit(this.undyedYarnPurchase);
     return true;
   }
-  editUYP(uypId: number): boolean{
+  editUYP(uypId: number): boolean {
 
-    //this.undyedYarnPurchase = 
+    this.formType = 'Edit';
+    this.formService.findByUYPId(uypId).subscribe((undyedYarnPurchase) => {
+      LoggerService.log(undyedYarnPurchase);
+      this.undyedYarnPurchase = undyedYarnPurchase;
+      this.formService.uypFormAction.emit(this.undyedYarnPurchase);
+    }, (error: Response) => {
+       LoggerService.error('Login Error', error);
+       this.logError(error);
+    });
+    console.log(uypId);
 
     return true;
   }
@@ -76,6 +85,6 @@ export class UypViewComponent implements OnInit {
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error);
+      this.errorService.handleError(error['error']);
   };
 }

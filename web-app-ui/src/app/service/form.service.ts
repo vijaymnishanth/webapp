@@ -12,12 +12,14 @@ export class FormService {
 
   private headers: HttpHeaders;
   private saveUYPUrl: string;
+  private findByUYPIdUrl: string;
 
   uypFormSaved = new EventEmitter<boolean>();
   uypFormAction = new EventEmitter<UndyedYarnPurchase>();
 
   constructor(private http: HttpClient) {
     this.saveUYPUrl = AppConfig.endpoints.saveUYP;
+    this.findByUYPIdUrl = AppConfig.endpoints.findByUYPId;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -35,6 +37,15 @@ export class FormService {
       map(response => {
         console.log(response);
         this.uypFormSaved.emit(true);
+        return response;
+      }),
+   catchError(error => this.handleError(error)));
+  }
+
+  findByUYPId(uypId: number): Observable<UndyedYarnPurchase> {
+    return this.http
+    .post(this.findByUYPIdUrl + '?token=' + localStorage.getItem('secureToken')  , uypId, {headers: this.headers}).pipe(
+      map(response => {
         return response;
       }),
    catchError(error => this.handleError(error)));

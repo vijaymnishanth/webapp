@@ -44,7 +44,7 @@ export class UndyedYarnPurchaseComponent implements OnInit {
     this.formService.uypFormAction.subscribe((uypForm => {
       console.log(uypForm);
       this.uypForm.setValue(uypForm);
-      //this.uypForm.value.purchaseDate = new Date();
+      // this.uypForm.value.purchaseDate = new Date();
     }));
   }
 
@@ -66,6 +66,6 @@ export class UndyedYarnPurchaseComponent implements OnInit {
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error);
+      this.errorService.handleError(error['error']);
   };
 }

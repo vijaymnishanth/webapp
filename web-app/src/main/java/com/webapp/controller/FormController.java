@@ -36,9 +36,9 @@ public class FormController {
 		return undyedYarnPurchaseService.findAllUYP();
 	}
 	
-	@RequestMapping(value = {"/findByUPYId"}, method = RequestMethod.POST)
-	public UndyedYarnPurchase findByUPYId(@RequestBody Long upyId) {
-		logger.info("findByUPYId");
+	@RequestMapping(value = {"/findByUYPId"}, method = RequestMethod.POST)
+	public UndyedYarnPurchase findByUYPId(@RequestBody Long upyId) {
+		logger.info("findByUYPId");
 		return undyedYarnPurchaseService.findByUPYId(upyId);
 	}
 }
