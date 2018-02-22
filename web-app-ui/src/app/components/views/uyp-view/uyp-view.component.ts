@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef  } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { UndyedYarnPurchase } from '../../../model/undyed-yarn-purchase';
@@ -6,6 +6,7 @@ import { UndyedYarnPurchase } from '../../../model/undyed-yarn-purchase';
 import { ErrorService } from '../../../service/error.service';
 import { LoggerService } from '../../../core/logger.service';
 import { ViewService } from '../../../service/view.service';
+import { FormService } from '../../../service/form.service';
 
 @Component({
   selector: 'app-uyp-view',
@@ -15,6 +16,9 @@ import { ViewService } from '../../../service/view.service';
 export class UypViewComponent implements OnInit {
 
   uypView: UndyedYarnPurchase[];
+  undyedYarnPurchase: UndyedYarnPurchase;
+
+  formType: string;
 
   maxSize = 5;
   bigTotalItems = 175;
@@ -25,14 +29,32 @@ export class UypViewComponent implements OnInit {
 
   constructor(
     private errorService: ErrorService,
-    private viewService: ViewService
+    private viewService: ViewService,
+    private formService: FormService
 
   ) { }
 
   ngOnInit() {
     this.loadUYPDetails();
+    this.formService.uypFormSaved.subscribe((isFormSaved => {
+      if(isFormSaved){
+        this.loadUYPDetails();
+      }
+    }));
   }
 
+  addUYP(): boolean{
+    this.formType="Add";
+    this.undyedYarnPurchase = new UndyedYarnPurchase();
+    this.formService.uypFormAction.emit(this.undyedYarnPurchase);
+    return true;
+  }
+  editUYP(uypId: number): boolean{
+
+    //this.undyedYarnPurchase = 
+
+    return true;
+  }
   loadUYPDetails() {
     this.viewService.findAllUYP().subscribe((data) => {
       this.uypView = data;

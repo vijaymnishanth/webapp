@@ -5,8 +5,13 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"yarnTypeId", "yarnCountId","supplierId","purchaseDate","quantity"})
+	}) 
 public class UndyedYarnPurchase {
 
 	@Id

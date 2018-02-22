@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
       this.showError = true;
       this.errorMessage = error['error']['message'];
       LoggerService.error('Login Error', error);
-       this.logError(error);
+       this.logError(error['error']);
     });
   }
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -12,6 +12,9 @@ export class FormService {
 
   private headers: HttpHeaders;
   private saveUYPUrl: string;
+
+  uypFormSaved = new EventEmitter<boolean>();
+  uypFormAction = new EventEmitter<UndyedYarnPurchase>();
 
   constructor(private http: HttpClient) {
     this.saveUYPUrl = AppConfig.endpoints.saveUYP;
@@ -31,9 +34,9 @@ export class FormService {
     .post(this.saveUYPUrl + '?token=' + localStorage.getItem('secureToken')  , undyedYarnPurchase, {headers: this.headers}).pipe(
       map(response => {
         console.log(response);
+        this.uypFormSaved.emit(true);
         return response;
       }),
    catchError(error => this.handleError(error)));
   }
-
 }

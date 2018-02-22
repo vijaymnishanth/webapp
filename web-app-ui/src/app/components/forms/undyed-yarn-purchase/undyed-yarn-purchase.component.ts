@@ -8,7 +8,7 @@ import { FormService } from '../../../service/form.service';
 import { UndyedYarnPurchase } from '../../../model/undyed-yarn-purchase';
 import { ErrorService } from '../../../service/error.service';
 import { LoggerService } from '../../../core/logger.service';
-
+declare var $: any;
 @Component({
   selector: 'app-undyed-yarn-purchase',
   templateUrl: './undyed-yarn-purchase.component.html',
@@ -29,6 +29,7 @@ export class UndyedYarnPurchaseComponent implements OnInit {
 
   createForm() {
     this.uypForm = this.fb.group({
+      uypId:[''],
       yarnTypeId: ['', Validators.required], // <--- the FormControl called "name"
       yarnCountId: ['', Validators.required],
       supplierId: ['', Validators.required],
@@ -39,12 +40,19 @@ export class UndyedYarnPurchaseComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.formService.uypFormAction.subscribe((uypForm => {
+      console.log(uypForm);
+      this.uypForm.setValue(uypForm);
+      //this.uypForm.value.purchaseDate = new Date();
+    }));
   }
 
   saveUYPForm() {
     this.undyedYarnPurchase = this.uypForm.value;
     console.log(this.undyedYarnPurchase);
     this.formService.saveUYPForm(this.undyedYarnPurchase).subscribe((undyedYarnPurchase) => {
+      $('#addEditUYPModal').modal('toggle');
      // this.onSucces(token);
     }, (error: Response) => {
        LoggerService.error('Login Error', error);

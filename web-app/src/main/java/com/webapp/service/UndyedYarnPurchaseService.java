@@ -9,4 +9,6 @@ public interface UndyedYarnPurchaseService {
 	public UndyedYarnPurchase saveUYP(UndyedYarnPurchase undyedYarnPurchase);
 	
 	public List<UndyedYarnPurchase> findAllUYP();
+	
+	public UndyedYarnPurchase findByUPYId(Long upyId);
 }

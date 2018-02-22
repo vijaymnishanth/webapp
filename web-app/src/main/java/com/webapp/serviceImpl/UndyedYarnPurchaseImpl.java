@@ -39,4 +39,9 @@ public class UndyedYarnPurchaseImpl implements UndyedYarnPurchaseService {
 		return listObject;
 	}
 
+	@Override
+	public UndyedYarnPurchase findByUPYId(Long upyId) {
+		return undyedYarnPurchaseDAO.findByUpyId(upyId);
+	}
+
 }

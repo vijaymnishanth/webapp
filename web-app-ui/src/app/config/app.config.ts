@@ -13,7 +13,8 @@ export const AppConfig: IAppConfig = {
   endpoints: {
     login: 'http://localhost:8080/web-app/api/login',
     saveUYP: 'http://localhost:8080/web-app/api/saveUYPForm',
-    findAllUYP: 'http://localhost:8080/web-app/api/findAllUYP'
+    findAllUYP: 'http://localhost:8080/web-app/api/findAllUYP',
+    findByUYPId: 'http://localhost:8080/web-app/api/findByUYPId'
   },
   endpointsProd: {
     login: 'api/login'
