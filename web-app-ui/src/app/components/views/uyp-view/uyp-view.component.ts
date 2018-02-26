@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { UndyedYarnPurchase } from '../../../model/undyed-yarn-purchase';
@@ -7,6 +7,8 @@ import { ErrorService } from '../../../service/error.service';
 import { LoggerService } from '../../../core/logger.service';
 import { ViewService } from '../../../service/view.service';
 import { FormService } from '../../../service/form.service';
+declare var $: any;
+
 
 @Component({
   selector: 'app-uyp-view',
@@ -17,15 +19,13 @@ export class UypViewComponent implements OnInit {
 
   uypView: UndyedYarnPurchase[];
   undyedYarnPurchase: UndyedYarnPurchase;
+  uypId: number[] = [];
 
   formType: string;
-
-  maxSize = 5;
-  bigTotalItems = 175;
-  bigCurrentPage = 1;
-  totalItems = 10;
-  numPages = 0;
   p = 1;
+
+  key = 'yarnTypeId'; // set default
+  reverse = false;
 
   constructor(
     private errorService: ErrorService,
@@ -75,11 +75,67 @@ export class UypViewComponent implements OnInit {
    });
   }
 
+  deleteUYPById(uypId: number) {
+    this.uypId = [uypId];
+    LoggerService.log(this.uypId);
+  }
+
+  deleteUYPByIds() {
+    const checkbox = $('table tbody input[type="checkbox"]');
+    // LoggerService.log(elem);
+    const selectedUYPId = [];
+        checkbox.each(function(){
+          if (this.checked) {
+            selectedUYPId.push(this.value);
+          }
+         });
+         this.uypId = selectedUYPId;
+  }
+
+  deleteUYP() {
+    this.formService.deleteUYP(this.uypId).subscribe(() => {
+      this.loadUYPDetails();
+      $('#deleteUYPModal').modal('toggle');
+
+    }, (error: Response) => {
+        LoggerService.error('Login Error', error);
+        this.logError(error);
+     }
+    );
+  }
+
+  selectAllRecord(elem) {
+
+    const checkbox = $('table tbody input[type="checkbox"]');
+   // LoggerService.log(elem);
+    if (elem.checked) {
+       checkbox.each(function(){
+         this.checked = true;
+        });
+      } else {
+        checkbox.each(function(){
+          this.checked = false;
+        });
+      }
+  }
+
+  selectRecord(event, id) {
+   // LoggerService.log(event.srcElement.checked);
+    const elem = event.srcElement;
+
+    if (!elem.checked) {
+      $('#selectAll').prop('checked', false);
+    }
+  }
   pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
     console.log('Number items per page: ' + event.itemsPerPage);
   }
 
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
           /**
      * @description handle error
      * @param error

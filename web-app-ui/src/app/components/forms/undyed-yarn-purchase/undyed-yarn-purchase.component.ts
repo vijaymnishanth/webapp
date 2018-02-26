@@ -29,7 +29,7 @@ export class UndyedYarnPurchaseComponent implements OnInit {
 
   createForm() {
     this.uypForm = this.fb.group({
-      uypId:[''],
+      uypId: [''],
       yarnTypeId: ['', Validators.required], // <--- the FormControl called "name"
       yarnCountId: ['', Validators.required],
       supplierId: ['', Validators.required],

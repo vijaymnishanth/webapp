@@ -26,7 +26,7 @@ export class ViewService {
 
   findAllUYP(): Observable<UndyedYarnPurchase[]> {
     return this.http
-    .get(this.findAllUYPUrl + '?token=' + localStorage.getItem('secureToken'), {headers: this.headers}).pipe(
+    .get(this.findAllUYPUrl , {headers: this.headers}).pipe(
       map(response => {
         return response;
       }),

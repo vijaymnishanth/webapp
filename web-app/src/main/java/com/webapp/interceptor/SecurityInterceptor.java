@@ -2,6 +2,7 @@ package com.webapp.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,10 +93,15 @@ private boolean validateTokenKey(String tokenKey){
     private String extractAuthTokenFromRequest(HttpServletRequest httpRequest) {
         /* Get token from header */
         String authToken = httpRequest.getHeader("X-Auth-Token");
+        HttpSession session;
  
                 /* If token not found get it from request parameter */
         if (authToken == null) {
             authToken = httpRequest.getParameter("token");
+        }
+        if (authToken == null) {
+            session = httpRequest.getSession();
+            authToken = (String) session.getAttribute("token");
         }
  
         return authToken;

@@ -2,6 +2,9 @@ package com.webapp.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.webapp.model.UndyedYarnPurchase;
 
 public interface UndyedYarnPurchaseService {
@@ -10,5 +13,7 @@ public interface UndyedYarnPurchaseService {
 	
 	public List<UndyedYarnPurchase> findAllUYP();
 	
-	public UndyedYarnPurchase findByUPYId(Long upyId);
+	public UndyedYarnPurchase findByUYPId(Long upyId);
+
+	void deleteUYP(List<Long> uypId);
 }

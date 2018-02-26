@@ -3,15 +3,19 @@ package com.webapp.serviceImpl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webapp.dao.UndyedYarnPurchaseDAO;
 import com.webapp.model.UndyedYarnPurchase;
 import com.webapp.service.UndyedYarnPurchaseService;
 
 @Service("UndyedYarnPurchaseService")
+
 public class UndyedYarnPurchaseImpl implements UndyedYarnPurchaseService {
 
 	@Autowired
@@ -40,8 +44,14 @@ public class UndyedYarnPurchaseImpl implements UndyedYarnPurchaseService {
 	}
 
 	@Override
-	public UndyedYarnPurchase findByUPYId(Long upyId) {
+	public UndyedYarnPurchase findByUYPId(Long upyId) {
 		return undyedYarnPurchaseDAO.findByUypId(upyId);
+	}
+	
+	
+	@Override
+	public void deleteUYP(List<Long> uypId) {
+		 undyedYarnPurchaseDAO.deleteByUypIdIn(uypId);
 	}
 
 }

@@ -22,6 +22,8 @@ import { ErrorService } from './service/error.service';
 import { FormService } from './service/form.service';
 import { UypViewComponent } from './components/views/uyp-view/uyp-view.component';
 import { ViewService } from './service/view.service';
+import { MatSnackBarModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,12 @@ import { ViewService } from './service/view.service';
     HttpClientModule,
     AppBootstrapModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
-  providers: [TestService, UserService, LoggerService, LoggedInAuthGuard, ErrorService, FormService, ViewService],
+  providers: [TestService, UserService, LoggerService,
+     LoggedInAuthGuard, ErrorService, FormService, ViewService, MatSnackBarModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

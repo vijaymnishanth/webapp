@@ -19,7 +19,7 @@
       </div>
       <div class="col-sm-6">
         <a href="#addEditUYPModal" (click)="addUYP()" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
-        <a href="#deleteEmployeeModal" (click)="openModal(template)" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+        <a href="#deleteUYPModal" (click)="deleteUYPByIds()" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
       </div>
             </div>
         </div>
@@ -28,23 +28,23 @@
     <tr>
       <th>
         <span class="custom-checkbox">
-          <input type="checkbox" id="selectAll">
+          <input (click)="selectAllRecord(selectAll)" type="checkbox" id="selectAll"  #selectAll>
           <label for="selectAll"></label>
         </span>
       </th>
-      <th>Yarn Type</th>
-      <th>Yarn Count</th>
-      <th>Supplier</th>
-      <th>Purchase Date</th>
-      <th>Quantity</th>
+      <th (click)="sort('yarnTypeId')">Yarn Type <span class="glyphicon sort-icon" *ngIf="key =='yarnTypeId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th (click)="sort('yarnCountId')">Yarn Count <span class="glyphicon sort-icon" *ngIf="key =='yarnCountId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th (click)="sort('supplierId')">Supplier <span class="glyphicon sort-icon" *ngIf="key =='supplierId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th (click)="sort('purchaseDate')">Purchase Date <span class="glyphicon sort-icon" *ngIf="key =='purchaseDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+      <th (click)="sort('quantity')">Quantity <span class="glyphicon sort-icon" *ngIf="key =='quantity'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let uyp of uypView | filter:search | paginate: { itemsPerPage: 5, currentPage: p }">
+    <tr *ngFor="let uyp of uypView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 5, currentPage: p }">
       <td>
         <span class="custom-checkbox">
-          <input type="checkbox" id="checkbox{{uyp.uypId}}" name="options[]" value=uyp.id>
+          <input type="checkbox" (click)="selectRecord($event,uyp.uypId)" id="checkbox{{uyp.uypId}}" name="options[]" value="{{uyp.uypId}}">
           <label for="checkbox{{uyp.uypId}}"></label>
         </span>
       </td>
@@ -65,7 +65,7 @@
       </td>
       <td>
         <a href="#addEditUYPModal" (click)="editUYP(uyp.uypId)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i></a>
-        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" tooltip="Delete">&#xE872;</i></a>
+        <a href="#deleteUYPModal" (click)="deleteUYPById(uyp.uypId)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" tooltip="Delete">&#xE872;</i></a>
     </td>
     </tr>
   </tbody>
@@ -83,23 +83,27 @@
 					<div class="modal-body">					
 					<app-undyed-yarn-purchase></app-undyed-yarn-purchase>				
 					</div>
-					<div *ngIf="false" class="modal-footer">
-						<input type="button"  class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" (click)="submitUYPForm()" class="btn btn-success" value="Add">
-					</div>
 			</div>
 		</div>
   </div>
-  
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      This is a modal.
-    </div>
-  </ng-template>
+
+  <!-- Delete Modal HTML -->
+	<div id="deleteUYPModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">						
+						<h4 class="modal-title">Delete Employee</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<p>Are you sure you want to delete these Records?</p>
+						<p class="text-warning"><small>This action cannot be undone.</small></p>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="button" (click)="deleteUYP()"  class="btn btn-danger" value="Delete">
+					</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -14,10 +14,15 @@ export const AppConfig: IAppConfig = {
     login: 'http://localhost:8080/web-app/api/login',
     saveUYP: 'http://localhost:8080/web-app/api/saveUYPForm',
     findAllUYP: 'http://localhost:8080/web-app/api/findAllUYP',
-    findByUYPId: 'http://localhost:8080/web-app/api/findByUYPId'
+    findByUYPId: 'http://localhost:8080/web-app/api/findByUYPId',
+    deleteUYP: 'http://localhost:8080/web-app/api/deleteUYP'
   },
   endpointsProd: {
-    login: 'api/login'
+    login: 'api/login',
+    saveUYP: 'api/saveUYPForm',
+    findAllUYP: 'api/findAllUYP',
+    findByUYPId: 'api/findByUYPId',
+    deleteUYP: 'api/deleteUYP'
   },
   votesLimit: 3,
   topHeroesLimit: 4,

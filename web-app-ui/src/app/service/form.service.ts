@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/observable/throw';
 
 import {UndyedYarnPurchase} from '../model/undyed-yarn-purchase';
@@ -13,13 +14,17 @@ export class FormService {
   private headers: HttpHeaders;
   private saveUYPUrl: string;
   private findByUYPIdUrl: string;
+  private deleteUYPUrl: string;
+  private translations: any;
 
   uypFormSaved = new EventEmitter<boolean>();
   uypFormAction = new EventEmitter<UndyedYarnPurchase>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private snackBar: MatSnackBar) {
     this.saveUYPUrl = AppConfig.endpoints.saveUYP;
     this.findByUYPIdUrl = AppConfig.endpoints.findByUYPId;
+    this.deleteUYPUrl = AppConfig.endpoints.deleteUYP;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -33,10 +38,11 @@ export class FormService {
   saveUYPForm(undyedYarnPurchase: UndyedYarnPurchase): Observable<UndyedYarnPurchase> {
 
     return this.http
-    .post(this.saveUYPUrl + '?token=' + localStorage.getItem('secureToken')  , undyedYarnPurchase, {headers: this.headers}).pipe(
+    .post(this.saveUYPUrl, undyedYarnPurchase, {headers: this.headers}).pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         this.uypFormSaved.emit(true);
+        this.showSnackBar('Form Saved');
         return response;
       }),
    catchError(error => this.handleError(error)));
@@ -44,10 +50,23 @@ export class FormService {
 
   findByUYPId(uypId: number): Observable<UndyedYarnPurchase> {
     return this.http
-    .post(this.findByUYPIdUrl + '?token=' + localStorage.getItem('secureToken')  , uypId, {headers: this.headers}).pipe(
+    .post(this.findByUYPIdUrl , uypId, {headers: this.headers}).pipe(
       map(response => {
         return response;
       }),
    catchError(error => this.handleError(error)));
   }
+
+  deleteUYP(uypId: number[]) {
+    return this.http
+    .post(this.deleteUYPUrl, uypId, {headers: this.headers}).pipe(
+   catchError(error => this.handleError(error)));
+  }
+
+  showSnackBar(name): void {
+    const config: any = new MatSnackBarConfig();
+    config.duration = AppConfig.snackBarDuration;
+    this.snackBar.open(name, 'OK', config);
+  }
+
 }

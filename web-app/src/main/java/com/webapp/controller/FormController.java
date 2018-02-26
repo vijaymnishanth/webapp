@@ -1,6 +1,7 @@
 package com.webapp.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,14 @@ public class FormController {
 	}
 	
 	@RequestMapping(value = {"/findByUYPId"}, method = RequestMethod.POST)
-	public UndyedYarnPurchase findByUYPId(@RequestBody Long upyId) {
+	public UndyedYarnPurchase findByUYPId(@RequestBody Long uypId) {
 		logger.info("findByUYPId");
-		return undyedYarnPurchaseService.findByUPYId(upyId);
+		return undyedYarnPurchaseService.findByUYPId(uypId);
 	}
+	
+	@RequestMapping(value = {"/deleteUYP"}, method = RequestMethod.POST)
+	public void deleteUYP(@RequestBody List<Long> uypId) {
+		logger.info("deleteUYP");
+		undyedYarnPurchaseService.deleteUYP(uypId);
+}
 }
