@@ -61,7 +61,7 @@ export class UndyedYarnPurchaseComponent implements OnInit {
 
   }
 
-        /**
+    /**
      * @description handle error
      * @param error
      */

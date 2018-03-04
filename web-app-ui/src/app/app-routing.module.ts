@@ -6,6 +6,7 @@ import {TestComponent} from './test/test.component';
 import {SignInComponent} from './authentication/sign-in/sign-in.component';
 import {HomeComponent} from './components/home/home.component';
 import {UndyedYarnPurchaseComponent} from './components/forms/undyed-yarn-purchase/undyed-yarn-purchase.component';
+import {DyeingOrderComponent} from './components/forms/dyeing-order/dyeing-order.component';
 import {UypViewComponent} from './components/views/uyp-view/uyp-view.component';
 import {LoggedInAuthGuard} from './guard/logged-in-auth.guard';
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'signin', component: SignInComponent},
   {path: 'uypForm', component: UndyedYarnPurchaseComponent},
+  {path: 'dyeingOrderForm', component: DyeingOrderComponent},
   {path: 'uypView', component: UypViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: AppConfig.routes.home, component: HomeComponent, canActivate: [LoggedInAuthGuard]
 }

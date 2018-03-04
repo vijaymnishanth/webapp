@@ -24,6 +24,7 @@ import { UypViewComponent } from './components/views/uyp-view/uyp-view.component
 import { ViewService } from './service/view.service';
 import { MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DyeingOrderComponent } from './components/forms/dyeing-order/dyeing-order.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NavComponent,
     UndyedYarnPurchaseComponent,
     ErrorComponent,
-    UypViewComponent
+    UypViewComponent,
+    DyeingOrderComponent
   ],
   imports: [
     BrowserModule,

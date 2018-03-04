@@ -6,6 +6,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; // importing the module
 import { Ng2OrderModule } from 'ng2-order-pipe';
@@ -19,11 +20,12 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    TypeaheadModule.forRoot(),
     NgxPaginationModule,
     Ng2SearchPipeModule,
     Ng2OrderModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,
-    BsDatepickerModule, PaginationModule, NgxPaginationModule, Ng2SearchPipeModule, Ng2OrderModule]
+    BsDatepickerModule, PaginationModule, TypeaheadModule, NgxPaginationModule, Ng2SearchPipeModule, Ng2OrderModule]
 })
 export class AppBootstrapModule { }
