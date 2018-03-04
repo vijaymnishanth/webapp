@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {AppConfig} from '../../../config/app.config';
 
 import { DyeingOrder } from '../../../model/dyeing-order';
+import { Shade } from './../../../model/shade';
 
 import { FormService } from '../../../service/form.service';
 import { ErrorService } from '../../../service/error.service';
@@ -18,10 +19,11 @@ import { LoggerService } from '../../../core/logger.service';
 export class DyeingOrderComponent implements OnInit {
 
   dyeingOrderForm: FormGroup;
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona'];
+  shade: Shade[] = [
+    {shadeId: 1, shadeNo: 'dasdas',
+    shadeColour: 'sdasdas'},
+    {shadeId: 2, shadeNo: 'hkajkl',
+    shadeColour: 'p[sd'}];
 
   constructor(private fb: FormBuilder,
     private router: Router,

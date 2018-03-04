@@ -14,7 +14,7 @@
       <div class="form-group">
         <label for="shadeNo" class="col-sm-3 control-label">Shade No</label>
         <div class="col-sm-7">
-          <input type="text" class="form-control" id="shadeNo" formControlName="shadeNo" [typeahead]="states" placeholder="Shade No">
+          <input type="text" class="form-control" id="shadeNo" formControlName="shadeNo" [typeahead]="shade" [typeaheadOptionField]="'shadeNo'" placeholder="Shade No">
         </div>
       </div>
 
