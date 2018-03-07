@@ -10,6 +10,7 @@
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="table-wrapper">
     <div class="table-title">
@@ -20,11 +21,11 @@
           </h2>
         </div>
         <div class="col-sm-6">
-          <a href="#addEditUYPModal" (click)="addUYP()" class="btn btn-success" data-toggle="modal">
+          <a href="#addDyeingOrderModal" (click)="addDyeingOrder()" class="btn btn-success" data-toggle="modal">
             <i class="material-icons">&#xE147;</i>
             <span>Add New</span>
           </a>
-          <a href="#deleteUYPModal" (click)="deleteUYPByIds()" class="btn btn-danger" data-toggle="modal">
+          <a href="#deleteUYPModal" (click)="deleteDOByIds()" class="btn btn-danger" data-toggle="modal">
             <i class="material-icons">&#xE15C;</i>
             <span>Delete</span>
           </a>
@@ -59,33 +60,33 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let uyp of uypView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 5, currentPage: p }">
+        <tr *ngFor="let do of dyeigOrderView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 5, currentPage: p }">
           <td>
             <span class="custom-checkbox">
-              <input type="checkbox" (click)="selectRecord($event,uyp.uypId)" id="checkbox{{uyp.uypId}}" name="options[]" value="{{uyp.uypId}}">
-              <label for="checkbox{{uyp.uypId}}"></label>
+              <input type="checkbox" (click)="selectRecord($event,do.dyeingOrderId)" id="checkbox{{do.dyeingOrderId}}" name="options[]" value="{{do.dyeingOrderId}}">
+              <label for="checkbox{{do.dyeingOrderId}}"></label>
             </span>
           </td>
           <td>
-            {{uyp.yarnTypeId}}
+            {{do.dyeingOrderNo}}
           </td>
           <td>
-            {{uyp.yarnCountId}}
+            {{do.orderDate | date:'mediumDate'}}
           </td>
           <td>
-            {{uyp.supplierId}}
+            {{do.shade.shadeNo}}
           </td>
           <td>
-            {{uyp.purchaseDate | date:'mediumDate'}}
+            {{do.shade.shadeColour}}
           </td>
           <td>
-            {{uyp.quantity}}
+            {{do.countId}}
           </td>
           <td>
-            <a href="#addEditUYPModal" (click)="editUYP(uyp.uypId)" class="edit" data-toggle="modal">
+            <a href="#addDyeingOrderModal" (click)="editDyeingOrder(do.dyeingOrderId)" class="edit" data-toggle="modal">
               <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
             </a>
-            <a href="#deleteUYPModal" (click)="deleteUYPById(uyp.uypId)" class="delete" data-toggle="modal">
+            <a href="#deleteUYPModal" (click)="deleteDOById(do.dyeingOrderId)" class="delete" data-toggle="modal">
               <i class="material-icons" data-toggle="tooltip" tooltip="Delete">&#xE872;</i>
             </a>
           </td>
@@ -95,39 +96,5 @@
     <div class="clearfix">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
-    <div id="addEditUYPModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title pull-left">{{formType}} Record</h4>
-            <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-          </div>
-          <div class="modal-body">
-            <app-undyed-yarn-purchase></app-undyed-yarn-purchase>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Delete Modal HTML -->
-    <div id="deleteUYPModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Delete Employee</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p>Are you sure you want to delete these Records?</p>
-            <p class="text-warning">
-              <small>This action cannot be undone.</small>
-            </p>
-          </div>
-          <div class="modal-footer">
-            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-            <input type="button" (click)="deleteUYP()" class="btn btn-danger" value="Delete">
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
+</div>

@@ -25,6 +25,7 @@ import { ViewService } from './service/view.service';
 import { MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DyeingOrderComponent } from './components/forms/dyeing-order/dyeing-order.component';
+import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/dyeing-order-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DyeingOrderComponent } from './components/forms/dyeing-order/dyeing-ord
     UndyedYarnPurchaseComponent,
     ErrorComponent,
     UypViewComponent,
-    DyeingOrderComponent
+    DyeingOrderComponent,
+    DyeingOrderViewComponent
   ],
   imports: [
     BrowserModule,

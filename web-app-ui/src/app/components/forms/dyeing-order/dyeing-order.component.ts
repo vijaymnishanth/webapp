@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 
 import {AppConfig} from '../../../config/app.config';
 
@@ -19,6 +20,11 @@ import { LoggerService } from '../../../core/logger.service';
 export class DyeingOrderComponent implements OnInit {
 
   dyeingOrderForm: FormGroup;
+  typeaheadLoading: boolean;
+  typeaheadNoResults: boolean;
+  shadeColour: string;
+  shadeId: number;
+
   shade: Shade[] = [
     {shadeId: 1, shadeNo: 'dasdas',
     shadeColour: 'sdasdas'},
@@ -40,9 +46,11 @@ export class DyeingOrderComponent implements OnInit {
       dyeingOrderId: [''],
       dyeingOrderNo: [''], // <--- the FormControl called "name"
       orderDate: [new Date(), Validators.required],
+      shade: this.fb.group({
       shadeId: ['', Validators.required],
-      shadeNo: [, Validators.required],
-      shadeColour: ['', Validators.required],
+      shadeNo: ['', Validators.required],
+      shadeColour: ['', Validators.required]
+      }),
       countId: ['', Validators.required],
       description: ['', Validators.required],
       customer: ['', Validators.required]
@@ -52,6 +60,20 @@ export class DyeingOrderComponent implements OnInit {
 
   saveDOForm() {
     // s
+  }
+
+  changeTypeaheadLoading(e: boolean): void {
+    this.typeaheadLoading = e;
+  }
+
+  changeTypeaheadNoResults(e: boolean): void {
+    this.typeaheadNoResults = e;
+  }
+
+  typeaheadOnSelect(e: TypeaheadMatch): void {
+    console.log('Selected value: ', e);
+    this.shadeId = e.item.shadeId;
+    this.shadeColour = e.item.shadeColour;
   }
      /**
      * @description handle error

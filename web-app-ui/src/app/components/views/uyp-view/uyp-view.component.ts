@@ -20,12 +20,11 @@ export class UypViewComponent implements OnInit {
   uypView: UndyedYarnPurchase[];
   undyedYarnPurchase: UndyedYarnPurchase;
   uypId: number[] = [];
-
   formType: string;
   p = 1;
-
   key = 'yarnTypeId'; // set default
   reverse = false;
+  search: string;
 
   constructor(
     private errorService: ErrorService,
@@ -120,7 +119,6 @@ export class UypViewComponent implements OnInit {
   }
 
   selectRecord(event, id) {
-   // LoggerService.log(event.srcElement.checked);
     const elem = event.srcElement;
 
     if (!elem.checked) {

@@ -6,7 +6,7 @@ export class UndyedYarnPurchase {
     purchaseDate: Date;
     quantity: number;
 
-    constructor(){
+    constructor() {
         this.uypId = null;
         this.yarnCountId = 0;
         this.yarnTypeId = 0;
