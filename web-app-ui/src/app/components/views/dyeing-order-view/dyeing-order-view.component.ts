@@ -22,6 +22,7 @@ export class DyeingOrderViewComponent implements OnInit {
   dyeingOrder: DyeingOrder;
   key = 'dyeingOrderNo'; // set default
   reverse = false;
+  page = 1;
 
   constructor(
     private errorService: ErrorService,
@@ -34,7 +35,14 @@ export class DyeingOrderViewComponent implements OnInit {
   }
 
   loadDyeingOrderDetails() {
-    // TODO
+    this.viewService.findAllDyeingOrder().subscribe((data) => {
+      this.dyeigOrderView = data;
+      LoggerService.log(this.dyeigOrderView);
+
+    }, (error: Response) => {
+      LoggerService.error('Login Error', error);
+      this.logError(error);
+   });
   }
 
   addDyeingOrder(): boolean {
@@ -80,4 +88,11 @@ export class DyeingOrderViewComponent implements OnInit {
     this.reverse = !this.reverse;
   }
 
+     /**
+     * @description handle error
+     * @param error
+     */
+    logError = function(error) {
+      this.errorService.handleError(error);
+  };
 }

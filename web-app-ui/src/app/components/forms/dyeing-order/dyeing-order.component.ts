@@ -20,12 +20,13 @@ import { LoggerService } from '../../../core/logger.service';
 export class DyeingOrderComponent implements OnInit {
 
   dyeingOrderForm: FormGroup;
+  dyeingOrder: DyeingOrder;
   typeaheadLoading: boolean;
   typeaheadNoResults: boolean;
   shadeColour: string;
   shadeId: number;
 
-  shade: Shade[] = [
+  shadeArray: Shade[] = [
     {shadeId: 1, shadeNo: 'dasdas',
     shadeColour: 'sdasdas'},
     {shadeId: 2, shadeNo: 'hkajkl',
@@ -53,13 +54,22 @@ export class DyeingOrderComponent implements OnInit {
       }),
       countId: ['', Validators.required],
       description: ['', Validators.required],
+      quantity: ['', Validators.required],
       customer: ['', Validators.required]
 
     });
   }
 
   saveDOForm() {
-    // s
+    this.dyeingOrder = this.dyeingOrderForm.value;
+    LoggerService.log(this.dyeingOrder);
+    this.formService.saveDOForm(this.dyeingOrder).subscribe((dyeingOrder) => {
+     // $('#addEditUYPModal').modal('toggle');
+     // this.onSucces(token);
+    }, (error: Response) => {
+       LoggerService.error('Login Error', error);
+       this.logError(error);
+    });
   }
 
   changeTypeaheadLoading(e: boolean): void {
@@ -80,6 +90,6 @@ export class DyeingOrderComponent implements OnInit {
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error['error']);
+      this.errorService.handleError(error);
   };
 }

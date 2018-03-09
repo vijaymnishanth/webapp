@@ -6,6 +6,7 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/observable/throw';
 
 import {UndyedYarnPurchase} from '../model/undyed-yarn-purchase';
+import {DyeingOrder} from '../model/dyeing-order';
 
 import {AppConfig} from '../config/app.config';
 @Injectable()
@@ -15,9 +16,11 @@ export class FormService {
   private saveUYPUrl: string;
   private findByUYPIdUrl: string;
   private deleteUYPUrl: string;
+  private saveDOUrl: string;
   private translations: any;
 
   uypFormSaved = new EventEmitter<boolean>();
+  dyeingOrderFormSaved = new EventEmitter<boolean>();
   uypFormAction = new EventEmitter<UndyedYarnPurchase>();
 
   constructor(private http: HttpClient,
@@ -25,6 +28,7 @@ export class FormService {
     this.saveUYPUrl = AppConfig.endpoints.saveUYP;
     this.findByUYPIdUrl = AppConfig.endpoints.findByUYPId;
     this.deleteUYPUrl = AppConfig.endpoints.deleteUYP;
+    this.saveDOUrl = AppConfig.endpoints.saveDyeingOrder;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -60,6 +64,18 @@ export class FormService {
   deleteUYP(uypId: number[]) {
     return this.http
     .post(this.deleteUYPUrl, uypId, {headers: this.headers}).pipe(
+   catchError(error => this.handleError(error)));
+  }
+
+  saveDOForm(dyeingOrder: DyeingOrder): Observable<DyeingOrder> {
+
+    return this.http
+    .post(this.saveDOUrl, dyeingOrder, {headers: this.headers}).pipe(
+      map(response => {
+        this.dyeingOrderFormSaved.emit(true);
+        this.showSnackBar('Form Saved');
+        return response;
+      }),
    catchError(error => this.handleError(error)));
   }
 

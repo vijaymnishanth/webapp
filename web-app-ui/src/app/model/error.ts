@@ -1,9 +1,9 @@
 export class Error {
     /**
      * Constructor for Error class
-     * @param title
+     * @param name
      * @param message
      */
-    constructor(public title: string, public message: string) {}
+    constructor(public name: string, public message: string) {}
 
 }

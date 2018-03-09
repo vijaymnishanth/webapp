@@ -1,3 +1,4 @@
+import { DyeingOrder } from './../model/dyeing-order';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
@@ -11,9 +12,11 @@ export class ViewService {
 
   private headers: HttpHeaders;
   private findAllUYPUrl: string;
+  private findAllDOUrl: string;
 
   constructor(private http: HttpClient) {
     this.findAllUYPUrl = AppConfig.endpoints.findAllUYP;
+    this.findAllDOUrl = AppConfig.endpoints.findAllDyeingOrder;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -27,6 +30,15 @@ export class ViewService {
   findAllUYP(): Observable<UndyedYarnPurchase[]> {
     return this.http
     .get(this.findAllUYPUrl , {headers: this.headers}).pipe(
+      map(response => {
+        return response;
+      }),
+   catchError(error => this.handleError(error)));
+  }
+
+  findAllDyeingOrder(): Observable<DyeingOrder[]> {
+    return this.http
+    .get(this.findAllDOUrl , {headers: this.headers}).pipe(
       map(response => {
         return response;
       }),

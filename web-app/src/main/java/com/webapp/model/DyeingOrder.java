@@ -14,8 +14,7 @@ import javax.persistence.SequenceGenerator;
 public class DyeingOrder {
 
 	@Id
-	@SequenceGenerator(name="ORD_SEQ", allocationSize=1, initialValue = 100000)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORD_SEQ")
+    @GeneratedValue
 	private Long dyeingOrderId;
 	
 	private String dyeingOrderNo;
@@ -97,7 +96,5 @@ public class DyeingOrder {
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-	
-	
-	
+			
 }

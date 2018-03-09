@@ -6,15 +6,15 @@ public class ErrorDetails {
 	private Date timestamp;
 	private String message;
 	private String details;
-	private String title;
+	private String name;
 	
 
-	public ErrorDetails(Date timestamp, String message, String details, String title) {
+	public ErrorDetails(Date timestamp, String message, String details, String name) {
 		super();
 		this.timestamp = timestamp;
 		this.message = message;
 		this.details = details;
-		this.title = title;
+		this.name = name;
 	}
 	
 	public Date getTimestamp() {
@@ -36,13 +36,15 @@ public class ErrorDetails {
 		this.details = details;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	
 
 	
 }

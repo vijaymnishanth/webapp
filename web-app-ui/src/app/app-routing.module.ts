@@ -9,13 +9,15 @@ import {UndyedYarnPurchaseComponent} from './components/forms/undyed-yarn-purcha
 import {DyeingOrderComponent} from './components/forms/dyeing-order/dyeing-order.component';
 import {UypViewComponent} from './components/views/uyp-view/uyp-view.component';
 import {LoggedInAuthGuard} from './guard/logged-in-auth.guard';
+import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/dyeing-order-view.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'signin', component: SignInComponent},
   {path: 'uypForm', component: UndyedYarnPurchaseComponent},
-  {path: 'dyeingOrderForm', component: DyeingOrderComponent},
+  {path: 'dyeingOrderForm', component: DyeingOrderComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'uypView', component: UypViewComponent, canActivate: [LoggedInAuthGuard]},
+  {path: 'dyeingOrderView', component: DyeingOrderViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: AppConfig.routes.home, component: HomeComponent, canActivate: [LoggedInAuthGuard]
 }
 ];

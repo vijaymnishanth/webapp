@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-sm-6">
           <h2>Manage
-            <b>Undyed Yarn To Pruchase</b>
+            <b>Dyeing Order</b>
           </h2>
         </div>
         <div class="col-sm-6">
@@ -32,6 +32,7 @@
         </div>
       </div>
     </div>
+    <div class="table-responsive">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -41,20 +42,29 @@
               <label for="selectAll"></label>
             </span>
           </th>
-          <th (click)="sort('yarnTypeId')">Yarn Type
-            <span class="glyphicon sort-icon" *ngIf="key =='yarnTypeId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          <th (click)="sort('dyeingOrderNo')">Dyeing Order No
+            <span class="glyphicon sort-icon" *ngIf="key =='dyeingOrderNo'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
-          <th (click)="sort('yarnCountId')">Yarn Count
-            <span class="glyphicon sort-icon" *ngIf="key =='yarnCountId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          <th (click)="sort('orderDate')">Order Date 
+            <span class="glyphicon sort-icon" *ngIf="key =='orderDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
-          <th (click)="sort('supplierId')">Supplier
-            <span class="glyphicon sort-icon" *ngIf="key =='supplierId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          <th (click)="sort('shadeNo')">Shade No
+            <span class="glyphicon sort-icon" *ngIf="key =='shadeNo'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
-          <th (click)="sort('purchaseDate')">Purchase Date
-            <span class="glyphicon sort-icon" *ngIf="key =='purchaseDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          <th (click)="sort('shadeColour')">Shade Colour
+            <span class="glyphicon sort-icon" *ngIf="key =='shadeColour'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('countId')">Count
+            <span class="glyphicon sort-icon" *ngIf="key =='countId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('description')">Description
+            <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
           <th (click)="sort('quantity')">Quantity
             <span class="glyphicon sort-icon" *ngIf="key =='quantity'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('customer')">Customer
+            <span class="glyphicon sort-icon" *ngIf="key =='customer'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
           <th>Actions</th>
         </tr>
@@ -83,6 +93,15 @@
             {{do.countId}}
           </td>
           <td>
+            {{do.description}}
+          </td>
+          <td>
+            {{do.quantity}}
+          </td>
+          <td>
+            {{do.customer}}
+          </td>
+          <td>
             <a href="#addDyeingOrderModal" (click)="editDyeingOrder(do.dyeingOrderId)" class="edit" data-toggle="modal">
               <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
             </a>
@@ -93,8 +112,9 @@
         </tr>
       </tbody>
     </table>
+  </div>
     <div class="clearfix">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -134,11 +134,11 @@ export class UypViewComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
-          /**
+    /**
      * @description handle error
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error['error']);
+      this.errorService.handleError(error);
   };
 }

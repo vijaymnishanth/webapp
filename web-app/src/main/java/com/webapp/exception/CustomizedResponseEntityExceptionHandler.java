@@ -21,21 +21,21 @@ public class CustomizedResponseEntityExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false),
 				"Server Error");
 		logger.error(ex);
-		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(UserException.class)
 	public final ResponseEntity<ErrorDetails> handleUserExceptions(UserException ex, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false),
 				"User Error");
-		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.CONFLICT);
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public final ResponseEntity<ErrorDetails> handleDataExceptions(DataIntegrityViolationException ex, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), "Duplicate record or Invalid data entry",
 				request.getDescription(false), "Data Error");
-		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.CONFLICT);
 	}
 
 }

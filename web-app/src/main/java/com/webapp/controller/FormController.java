@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webapp.model.DyeingOrder;
 import com.webapp.model.UndyedYarnPurchase;
+import com.webapp.service.DyeingOrderService;
 import com.webapp.service.UndyedYarnPurchaseService;
 
 @RestController
@@ -22,6 +24,9 @@ public class FormController {
 
 	@Autowired
 	UndyedYarnPurchaseService undyedYarnPurchaseService;
+	
+	@Autowired
+	DyeingOrderService dyeingOrderService;
 	
 	static final Logger logger = Logger.getLogger(FormController.class); 
 
@@ -48,4 +53,17 @@ public class FormController {
 		logger.info("deleteUYP");
 		undyedYarnPurchaseService.deleteUYP(uypId);
 }
+	// Dyeing Order
+	
+	@RequestMapping(value = {"/saveDyeingOrderForm"}, method = RequestMethod.POST)
+	public DyeingOrder saveDyeingOrderForm(@RequestBody DyeingOrder dyeingOrder) {
+		logger.info("saveDyeingOrderForm");
+		return dyeingOrderService.saveDyeingOrder(dyeingOrder);
+	}
+	
+	@RequestMapping(value = {"/findAllDyeingOrder"}, method = RequestMethod.GET)
+	public List<DyeingOrder> findAllDyeingOrder() {
+		logger.info("findAllDyeingOrder");
+		return dyeingOrderService.findAllDyeingOrder();
+	}
 }

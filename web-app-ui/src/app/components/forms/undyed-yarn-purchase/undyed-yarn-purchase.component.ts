@@ -66,6 +66,6 @@ export class UndyedYarnPurchaseComponent implements OnInit {
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error['error']);
+      this.errorService.handleError(error);
   };
 }

@@ -75,6 +75,6 @@ export class SignInComponent implements OnInit {
      * @param error
      */
     logError = function(error) {
-      this.errorService.handleError(error['error']);
+      this.errorService.handleError(error);
   };
 }
