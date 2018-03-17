@@ -74,12 +74,13 @@ export class UypViewComponent implements OnInit {
    });
   }
 
-  deleteUYPById(uypId: number) {
+  deleteUYPById(uypId: number): boolean {
     this.uypId = [uypId];
     LoggerService.log(this.uypId);
+    return true;
   }
 
-  deleteUYPByIds() {
+  deleteUYPByIds(): boolean {
     const checkbox = $('table tbody input[type="checkbox"]');
     // LoggerService.log(elem);
     const selectedUYPId = [];
@@ -89,13 +90,13 @@ export class UypViewComponent implements OnInit {
           }
          });
          this.uypId = selectedUYPId;
+         return true;
   }
 
   deleteUYP() {
     this.formService.deleteUYP(this.uypId).subscribe(() => {
       this.loadUYPDetails();
       $('#deleteUYPModal').modal('toggle');
-
     }, (error: Response) => {
         LoggerService.error('Login Error', error);
         this.logError(error);
@@ -104,7 +105,6 @@ export class UypViewComponent implements OnInit {
   }
 
   selectAllRecord(elem) {
-
     const checkbox = $('table tbody input[type="checkbox"]');
    // LoggerService.log(elem);
     if (elem.checked) {
