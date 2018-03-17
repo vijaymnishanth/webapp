@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.webapp.dao.DyeingOrderDAO;
 import com.webapp.model.DyeingOrder;
-import com.webapp.model.UndyedYarnPurchase;
 import com.webapp.service.DyeingOrderService;
 
 @Service("DyeingOrderService")
@@ -20,6 +19,8 @@ public class DyeingOrderServiceImpl implements DyeingOrderService{
 	
 	@Override
 	public DyeingOrder saveDyeingOrder(DyeingOrder dyeingOrder) {
+		dyeingOrder = dyeingOrderDAO.save(dyeingOrder);
+		dyeingOrder.setDyeingOrderNo("DO" + (dyeingOrder.getDyeingOrderId() + 5000));
 		return dyeingOrderDAO.save(dyeingOrder);
 	}
 
@@ -36,6 +37,11 @@ public class DyeingOrderServiceImpl implements DyeingOrderService{
 		}
 		
 		return listObject;
+	}
+
+	@Override
+	public void deleteDyeingOrder(List<Long> dyeingOrderId) {
+		dyeingOrderDAO.deleteByDyeingOrderId(dyeingOrderId);
 	}
 
 }

@@ -1,3 +1,5 @@
+import { DyeingOrderReceived } from './../model/dyeing-order-received';
+import { Count } from './../model/count';
 import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
@@ -6,9 +8,10 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/observable/throw';
 
 import {UndyedYarnPurchase} from '../model/undyed-yarn-purchase';
-import {DyeingOrder} from '../model/dyeing-order';
+
 
 import {AppConfig} from '../config/app.config';
+import { Shade } from '../model/shade';
 @Injectable()
 export class FormService {
 
@@ -16,11 +19,10 @@ export class FormService {
   private saveUYPUrl: string;
   private findByUYPIdUrl: string;
   private deleteUYPUrl: string;
-  private saveDOUrl: string;
-  private translations: any;
+  private searchByShadeNoUrl: string;
+  private findAllCountUrl: string;
 
   uypFormSaved = new EventEmitter<boolean>();
-  dyeingOrderFormSaved = new EventEmitter<boolean>();
   uypFormAction = new EventEmitter<UndyedYarnPurchase>();
 
   constructor(private http: HttpClient,
@@ -28,7 +30,8 @@ export class FormService {
     this.saveUYPUrl = AppConfig.endpoints.saveUYP;
     this.findByUYPIdUrl = AppConfig.endpoints.findByUYPId;
     this.deleteUYPUrl = AppConfig.endpoints.deleteUYP;
-    this.saveDOUrl = AppConfig.endpoints.saveDyeingOrder;
+    this.searchByShadeNoUrl =  AppConfig.endpoints.searchByShadeNo;
+    this.findAllCountUrl = AppConfig.endpoints.findAllCount;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -67,13 +70,23 @@ export class FormService {
    catchError(error => this.handleError(error)));
   }
 
-  saveDOForm(dyeingOrder: DyeingOrder): Observable<DyeingOrder> {
+  searchByShadeNo(shadeNo: String): Observable<Shade[]> {
 
     return this.http
-    .post(this.saveDOUrl, dyeingOrder, {headers: this.headers}).pipe(
+    .post(this.searchByShadeNoUrl, shadeNo, {headers: this.headers}).pipe(
       map(response => {
-        this.dyeingOrderFormSaved.emit(true);
-        this.showSnackBar('Form Saved');
+        // this.dyeingOrderFormSaved.emit(true);
+        // this.showSnackBar('Form Saved');
+        return response;
+      }),
+   catchError(error => this.handleError(error)));
+  }
+
+  findAllCount(): Observable<Count[]> {
+
+    return this.http
+    .get(this.findAllCountUrl, {headers: this.headers}).pipe(
+      map(response => {
         return response;
       }),
    catchError(error => this.handleError(error)));

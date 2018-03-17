@@ -15,10 +15,12 @@
       <div class="form-group">
         <label for="shadeNo" class="col-sm-3 control-label">Shade No</label>
         <div class="col-sm-7">
-          <input type="text" class="form-control" id="shadeNo" 
-          formControlName="shadeNo" 
+          <input type="text" class="form-control" id="shadeNo" autocomplete="off" 
+          [(ngModel)] = "shadeNoSelected"
+          formControlName="shadeNo"
           [typeaheadMinLength] = "2"
           [typeahead]="shadeArray" [typeaheadOptionField]="'shadeNo'"
+          (typeaheadLoading)="changeTypeaheadLoading($event)"
           (typeaheadNoResults)="changeTypeaheadNoResults($event)"
           (typeaheadOnSelect)="typeaheadOnSelect($event)"
            placeholder="Shade No">
@@ -35,18 +37,17 @@
         </div>
       </div>
     </div>
+    <div formGroupName="count">
     <div class="form-group">
       <label for="yarnTypeId" class="col-sm-3 control-label">Count</label>
       <div class="col-sm-7">
           <select id="countId" formControlName="countId" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option value="0">Select Count</option>
+              <option *ngFor="let count of countArray" value="{{count.countId}}">{{count.count}}</option>
             </select>
       </div>
     </div>
+  </div>
 
     <div class="form-group">
         <label for="description" class="col-sm-3 control-label">Description</label>

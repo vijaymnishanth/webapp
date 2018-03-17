@@ -1,3 +1,6 @@
+import { DyeingOrderService } from './../../../service/dyeing-order.service';
+import { Count } from './../../../model/count';
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +15,8 @@ import { FormService } from '../../../service/form.service';
 import { ErrorService } from '../../../service/error.service';
 import { LoggerService } from '../../../core/logger.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-dyeing-order',
   templateUrl: './dyeing-order.component.html',
@@ -23,23 +28,38 @@ export class DyeingOrderComponent implements OnInit {
   dyeingOrder: DyeingOrder;
   typeaheadLoading: boolean;
   typeaheadNoResults: boolean;
+  shadeNoSelected: string;
   shadeColour: string;
   shadeId: number;
+  countArray: Count[];
 
-  shadeArray: Shade[] = [
-    {shadeId: 1, shadeNo: 'dasdas',
-    shadeColour: 'sdasdas'},
-    {shadeId: 2, shadeNo: 'hkajkl',
-    shadeColour: 'p[sd'}];
+  shadeArray: Observable<Shade[]>;
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private formService: FormService,
+    private dyeingOrderService: DyeingOrderService,
     private errorService: ErrorService) {
     this.createForm();
+    this.shadeArray = Observable.create((observer: any) => {
+      // Runs on every search
+      observer.next(this.shadeNoSelected);
+    }).mergeMap((token: string) => this.formService.searchByShadeNo(token));
   }
 
   ngOnInit() {
+
+    this.formService.findAllCount().subscribe((count) => {
+     this.countArray = count;
+     }, (error: Response) => {
+        LoggerService.error('Login Error', error);
+        this.logError(error);
+     });
+
+     this.dyeingOrderService.doFormAction.subscribe((dyeingOder) => {
+      LoggerService.log(dyeingOder);
+       this.dyeingOrderForm.setValue(dyeingOder);
+     });
   }
 
   createForm() {
@@ -52,7 +72,11 @@ export class DyeingOrderComponent implements OnInit {
       shadeNo: ['', Validators.required],
       shadeColour: ['', Validators.required]
       }),
-      countId: ['', Validators.required],
+      count: this.fb.group({
+        countId: ['0', Validators.required],
+        count: [''],
+        countDesc: ['']
+      }),
       description: ['', Validators.required],
       quantity: ['', Validators.required],
       customer: ['', Validators.required]
@@ -62,10 +86,11 @@ export class DyeingOrderComponent implements OnInit {
 
   saveDOForm() {
     this.dyeingOrder = this.dyeingOrderForm.value;
-    LoggerService.log(this.dyeingOrder);
-    this.formService.saveDOForm(this.dyeingOrder).subscribe((dyeingOrder) => {
-     // $('#addEditUYPModal').modal('toggle');
-     // this.onSucces(token);
+    this.dyeingOrderService.saveDOForm(this.dyeingOrder).subscribe((dyeingOrder) => {
+      this.dyeingOrderService.dyeingOrder = dyeingOrder;
+      LoggerService.log(this.dyeingOrder);
+      this.dyeingOrderService.dyeingOrderFormSaved.emit(true);
+      $('#dyeingOrderModal').modal('toggle');
     }, (error: Response) => {
        LoggerService.error('Login Error', error);
        this.logError(error);

@@ -4,11 +4,9 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 public class DyeingOrder {
@@ -21,11 +19,13 @@ public class DyeingOrder {
 	
 	private Date orderDate;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
     @JoinColumn(name="shadeId")
 	private Shade shade;
 	
-	private Long countId;
+	@ManyToOne(optional = false)
+    @JoinColumn(name="countId")
+	private Count count;
 	
 	private String description;
 	
@@ -64,13 +64,13 @@ public class DyeingOrder {
 	public void setShade(Shade shade) {
 		this.shade = shade;
 	}
-
-	public Long getCountId() {
-		return countId;
+	
+	public Count getCount() {
+		return count;
 	}
 
-	public void setCountId(Long countId) {
-		this.countId = countId;
+	public void setCount(Count count) {
+		this.count = count;
 	}
 
 	public String getDescription() {
@@ -96,5 +96,14 @@ public class DyeingOrder {
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
+
+	@Override
+	public String toString() {
+		return "DyeingOrder [dyeingOrderId=" + dyeingOrderId + ", dyeingOrderNo=" + dyeingOrderNo + ", orderDate="
+				+ orderDate + ", shade=" + shade + ", count=" + count + ", description=" + description + ", quantity="
+				+ quantity + ", customer=" + customer + "]";
+	}
+	
+	
 			
 }

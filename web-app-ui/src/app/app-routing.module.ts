@@ -1,3 +1,4 @@
+import { RdoViewComponent } from './components/views/rdo-view/rdo-view.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'dyeingOrderForm', component: DyeingOrderComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'uypView', component: UypViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'dyeingOrderView', component: DyeingOrderViewComponent, canActivate: [LoggedInAuthGuard]},
+  {path: 'receivedDyeingOrderView', component: RdoViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: AppConfig.routes.home, component: HomeComponent, canActivate: [LoggedInAuthGuard]
 }
 ];

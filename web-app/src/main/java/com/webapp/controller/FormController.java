@@ -1,7 +1,6 @@
 package com.webapp.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webapp.model.Count;
 import com.webapp.model.DyeingOrder;
+import com.webapp.model.DyeingOrderReceived;
+import com.webapp.model.Shade;
 import com.webapp.model.UndyedYarnPurchase;
+import com.webapp.service.DyeingOrderReceivedService;
 import com.webapp.service.DyeingOrderService;
+import com.webapp.service.FormService;
 import com.webapp.service.UndyedYarnPurchaseService;
 
 @RestController
@@ -27,6 +31,12 @@ public class FormController {
 	
 	@Autowired
 	DyeingOrderService dyeingOrderService;
+	
+	@Autowired
+	FormService formService;
+	
+	@Autowired
+	DyeingOrderReceivedService dyeingOrderReceivedService;
 	
 	static final Logger logger = Logger.getLogger(FormController.class); 
 
@@ -65,5 +75,53 @@ public class FormController {
 	public List<DyeingOrder> findAllDyeingOrder() {
 		logger.info("findAllDyeingOrder");
 		return dyeingOrderService.findAllDyeingOrder();
+	}
+	
+	@RequestMapping(value = {"/searchByShadeNo"}, method = RequestMethod.POST)
+	public List<Shade> searchByShadeNo(@RequestBody String shadeNo) {
+		logger.info("searchByShadeNo");
+		return formService.searchByShadeNo(shadeNo);
+	}
+	
+	@RequestMapping(value = {"/findAllCount"}, method = RequestMethod.GET)
+	public List<Count> findAllCount() {
+		logger.info("findAllCount");
+		return formService.findAllCount();
+	}
+	
+	@RequestMapping(value = {"/findDORByDOId"}, method = RequestMethod.POST)
+	public List<DyeingOrderReceived> findDORByDOId(@RequestBody Long dyeingOrderId) {
+		logger.info("findDORByDOId");
+		return dyeingOrderReceivedService.findDORByDOId(dyeingOrderId);
+	}
+	
+	@RequestMapping(value = {"/saveDORForm"}, method = RequestMethod.POST)
+	public DyeingOrderReceived saveDORForm(@RequestBody DyeingOrderReceived dyeingOrderReceived) {
+		logger.info("saveDORForm");
+		return dyeingOrderReceivedService.saveDOR(dyeingOrderReceived);
+	}
+	
+	@RequestMapping(value = {"/findSumOfDOR"}, method = RequestMethod.POST)
+	public Long findSumOfDOR(@RequestBody Long dyeingOrderId) {
+		logger.info("findSumOfDOR");
+		return dyeingOrderReceivedService.sumOfDyeingOrderReceived(dyeingOrderId);
+	}
+	
+	@RequestMapping(value = {"/deleteDOR"}, method = RequestMethod.POST)
+	public void deleteDOR(@RequestBody List<Long> dorId) {
+		logger.info("deleteDOR");
+		dyeingOrderReceivedService.deleteDOR(dorId);
+	}
+	
+	@RequestMapping(value = {"/deleteDyeingOrder"}, method = RequestMethod.POST)
+	public void deleteDyeingOrder(@RequestBody List<Long> dyeingOrderId) {
+		logger.info("deleteDyeingOrder");
+		dyeingOrderService.deleteDyeingOrder(dyeingOrderId);
+	}
+	
+	@RequestMapping(value = {"/countOfDOR"}, method = RequestMethod.POST)
+	public Long countOfDOR(@RequestBody List<Long> dyeingOrderId) {
+		logger.info("countOfDOR");
+		return dyeingOrderReceivedService.countOfDOR(dyeingOrderId);
 	}
 }

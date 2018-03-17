@@ -4,6 +4,8 @@ import {IAppConfig} from './iapp.config';
 
 export let APP_CONFIG = new InjectionToken('app.config');
 
+const server = 'http://localhost:8080/web-app/';
+
 export const AppConfig: IAppConfig = {
   routes: {
     signin: 'signin',
@@ -11,13 +13,21 @@ export const AppConfig: IAppConfig = {
     error404: '404'
   },
   endpoints: {
-    login: 'http://localhost:8080/web-app/api/login',
-    saveUYP: 'http://localhost:8080/web-app/api/saveUYPForm',
-    findAllUYP: 'http://localhost:8080/web-app/api/findAllUYP',
-    findByUYPId: 'http://localhost:8080/web-app/api/findByUYPId',
-    deleteUYP: 'http://localhost:8080/web-app/api/deleteUYP',
-    saveDyeingOrder: 'http://localhost:8080/web-app/api/saveDyeingOrderForm',
-    findAllDyeingOrder: 'http://localhost:8080/web-app/api/findAllDyeingOrder'
+    login: server + 'api/login',
+    saveUYP: server + 'api/saveUYPForm',
+    findAllUYP: server + 'api/findAllUYP',
+    findByUYPId: server + 'api/findByUYPId',
+    deleteUYP: server + 'api/deleteUYP',
+    saveDyeingOrder: server + 'api/saveDyeingOrderForm',
+    findAllDyeingOrder: server + 'api/findAllDyeingOrder',
+    searchByShadeNo: server + 'api/searchByShadeNo',
+    findAllCount: server + 'api/findAllCount',
+    findDORByDOId: server + 'api/findDORByDOId',
+    saveDORForm: server + 'api/saveDORForm',
+    findSumOfDOR: server + 'api/findSumOfDOR',
+    deleteDOR: server + 'api/deleteDOR',
+    deleteDyeingOrder: server + 'api/deleteDyeingOrder',
+    countOfDOR: server + 'api/countOfDOR'
   },
   endpointsProd: {
     login: 'api/login',

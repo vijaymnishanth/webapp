@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,35 +19,45 @@ public class UndyedYarnPurchase {
 	@Id
     @GeneratedValue
 	private Long uypId;
-	private Long yarnTypeId;
-	private Long yarnCountId;
-	private Long supplierId;
+	
+	@ManyToOne(optional = false)
+    @JoinColumn(name="yarnTypeId")
+	private YarnType yarnType;
+	
+	@ManyToOne(optional = false)
+    @JoinColumn(name="countId")
+	private Count count;
+	
+	private String supplier;
+	
 	private Date purchaseDate;
+	
 	private Long quantity;
+	
 	public Long getUypId() {
 		return uypId;
 	}
 	public void setUypId(Long uypId) {
 		this.uypId = uypId;
 	}
-	public Long getYarnTypeId() {
-		return yarnTypeId;
-	}
-	public void setYarnTypeId(Long yarnTypeId) {
-		this.yarnTypeId = yarnTypeId;
-	}
-	public Long getYarnCountId() {
-		return yarnCountId;
-	}
-	public void setYarnCountId(Long yarnCountId) {
-		this.yarnCountId = yarnCountId;
-	}
 
-	public Long getSupplierId() {
-		return supplierId;
+	public YarnType getYarnType() {
+		return yarnType;
 	}
-	public void setSupplierId(Long supplierId) {
-		this.supplierId = supplierId;
+	public void setYarnType(YarnType yarnType) {
+		this.yarnType = yarnType;
+	}
+	public Count getCount() {
+		return count;
+	}
+	public void setCount(Count count) {
+		this.count = count;
+	}
+	public String getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
 	}
 	public Date getPurchaseDate() {
 		return purchaseDate;

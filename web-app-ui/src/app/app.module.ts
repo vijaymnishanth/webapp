@@ -26,6 +26,9 @@ import { MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DyeingOrderComponent } from './components/forms/dyeing-order/dyeing-order.component';
 import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/dyeing-order-view.component';
+import { RdoViewComponent } from './components/views/rdo-view/rdo-view.component';
+import { DyeingOrderReceivedComponent } from './components/forms/dyeing-order-received/dyeing-order-received.component';
+import { DyeingOrderService } from './service/dyeing-order.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/d
     ErrorComponent,
     UypViewComponent,
     DyeingOrderComponent,
-    DyeingOrderViewComponent
+    DyeingOrderViewComponent,
+    RdoViewComponent,
+    DyeingOrderReceivedComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,7 @@ import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/d
     BrowserAnimationsModule
   ],
   providers: [TestService, UserService, LoggerService,
-     LoggedInAuthGuard, ErrorService, FormService, ViewService, MatSnackBarModule],
+     LoggedInAuthGuard, ErrorService, FormService, ViewService, MatSnackBarModule, DyeingOrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

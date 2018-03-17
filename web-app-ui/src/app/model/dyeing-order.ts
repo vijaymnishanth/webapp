@@ -1,3 +1,4 @@
+import { Count } from './count';
 import { Shade } from './shade';
 export class DyeingOrder {
     dyeingOrderId: number;
@@ -5,7 +6,7 @@ export class DyeingOrder {
     orderDate: Date;
     shadeId: number;
     shade: Shade;
-    countId: number;
+    count: Count;
     description: string;
     quantity: number;
     customer: string;
@@ -16,7 +17,7 @@ export class DyeingOrder {
         this.orderDate = new Date();
         this.shadeId = null;
         this.shade = new Shade();
-        this.countId = 0;
+        this.count = new Count();
         this.description = null;
         this.quantity = null;
         this.customer = null;

@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <b>Dyeing Order Details</b>
+      <a href="#dyeingOrderModal" (click)="editDyeingOrder()" class="btn-sm btn-default pull-right" data-toggle="modal">
+        <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
+      </a>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <label class="col-sm-2 control-label">Order No:</label>
+        <span class="col-sm-2">{{dyeingOrder.dyeingOrderNo}}</span>
+        <label class="col-sm-2 control-label">Order Date:</label>
+        <span class="col-sm-2">{{dyeingOrder.orderDate | date:'mediumDate'}}</span>
+        <label class="col-sm-2 control-label">Description:</label>
+        <span class="col-sm-2">{{dyeingOrder.description}}</span>
+      </div>
+      <div class="col-sm-12">
+        <label class="col-sm-2 control-label">Count:</label>
+        <span class="col-sm-2">{{dyeingOrder.count.count}}</span>
+        <label class="col-sm-2 control-label">Shade No:</label>
+        <span class="col-sm-2">{{dyeingOrder.shade.shadeNo}}</span>
+        <label class="col-sm-2 control-label">Colour:</label>
+        <span class="col-sm-2">{{dyeingOrder.shade.shadeColour}}</span>
+      </div>
+      <div class="col-sm-12">
+        <label class="col-sm-2 control-label">Quantity:</label>
+        <span class="col-sm-2">{{dyeingOrder.quantity}}</span>
+        <label class="col-sm-2 control-label">Colour:</label>
+        <span class="col-sm-2">{{dyeingOrder.shade.shadeColour}}</span>
+        <label class="col-sm-2 control-label">Balance:</label>
+        <span class="col-sm-2">{{balanceOrderQuantity}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Manage
+            <b>Dyeing Order Received</b>
+          </h2>
+        </div>
+        <div class="col-sm-6">
+          <a href="#addEditDORModal" (click)="addDyeingOrderReceived()" class="btn btn-success" data-toggle="modal">
+            <i class="material-icons">&#xE147;</i>
+            <span>Add New</span>
+          </a>
+          <a href="#deleteDORModal" (click)="deleteDORByIds()" class="btn btn-danger" data-toggle="modal">
+            <i class="material-icons">&#xE15C;</i>
+            <span>Delete</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              <span class="custom-checkbox">
+                <input (click)="selectAllRecord(selectAll)" type="checkbox" id="selectAll" #selectAll>
+                <label for="selectAll"></label>
+              </span>
+            </th>
+            <th (click)="sort('receivedDate')">Received Date
+              <span class="glyphicon sort-icon" *ngIf="key =='receivedDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="sort('receivedQuantity')">Received Quantity
+              <span class="glyphicon sort-icon" *ngIf="key =='receivedQuantity'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th (click)="sort('dyeingChallanNo')">Dyeing Challan No
+              <span class="glyphicon sort-icon" *ngIf="key =='dyeingChallanNo'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dor of dorView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 3, currentPage: page }">
+            <td>
+              <span class="custom-checkbox">
+                <input type="checkbox" (click)="selectRecord($event,dor.dorId)" id="checkbox{{dor.dorId}}" name="options[]" value="{{dor.dorId}}">
+                <label for="checkbox{{dor.dorId}}"></label>
+              </span>
+            </td>
+            <td>
+              {{dor.receivedDate | date:'mediumDate'}}
+            </td>
+            <td>
+              {{dor.receivedQuantity}}
+            </td>
+            <td>
+              {{dor.dyeingChallanNo}}
+            </td>
+            <td>
+              <a href="#addEditDORModal" (click)="editDyeingOrderReceived(dor)" class="edit" data-toggle="modal">
+                <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
+              </a>
+              <a href="#deleteDORModal" (click)="deleteDORById(dor.dorId)" class="delete" data-toggle="modal">
+                <i class="material-icons" data-toggle="tooltip" tooltip="Delete">&#xE872;</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clearfix">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+  <!--Add Modal-->
+  <div id="addEditDORModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{formType}} Record</h4>
+          <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <app-dyeing-order-received></app-dyeing-order-received>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- Delete Modal HTML -->
+      <div id="deleteDORModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Delete Record</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete these Records?</p>
+              <p class="text-warning">
+                <small>This action cannot be undone.</small>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+              <input type="button" (click)="deleteDOR()" class="btn btn-danger" value="Delete">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Edit Modal-->
+  <div id="dyeingOrderModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Edit Record</h4>
+            <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <app-dyeing-order></app-dyeing-order>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

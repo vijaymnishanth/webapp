@@ -10,4 +10,6 @@ public interface DyeingOrderService {
 	
 	public List<DyeingOrder> findAllDyeingOrder();
 	
+	public void deleteDyeingOrder(List<Long> dyeingOrderId);
+	
 }
