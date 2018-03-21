@@ -1,38 +1,30 @@
 <form [formGroup]="uypForm" class="form-horizontal" (ngSubmit)="saveUYPForm()">
+  <div formGroupName="yarnType">
     <div class="form-group">
-        <label for="yarnTypeId" class="col-sm-3 control-label">Yarn Type</label>
-        <div class="col-sm-7">
-            <select id="yarnTypeId" formControlName="yarnTypeId" class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-        </div>
+      <label for="yarnTypeId" class="col-sm-3 control-label">Yarn Type</label>
+      <div class="col-sm-7">
+          <select id="yarnTypeId" formControlName="yarnTypeId" class="form-control">
+              <option value="0">Select Yarn Type</option>
+              <option *ngFor="let yarnType of yarnTypeArray" value="{{yarnType.yarnTypeId}}">{{yarnType.yarnType}}</option>
+            </select>
       </div>
-      <div class="form-group">
-          <label for="yarnCountId" class="col-sm-3 control-label">Count</label>
+    </div>
+  </div>
+      <div formGroupName="count">
+        <div class="form-group">
+          <label for="yarnTypeId" class="col-sm-3 control-label">Count</label>
           <div class="col-sm-7">
-              <select id="yarnCountId" formControlName="yarnCountId" class="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+              <select id="countId" formControlName="countId" class="form-control">
+                  <option value="0">Select Count</option>
+                  <option *ngFor="let count of countArray" value="{{count.countId}}">{{count.count}}</option>
                 </select>
           </div>
         </div>
-        <div class="form-group">
-            <label for="supplierId" class="col-sm-3 control-label">Supplier</label>
+      </div>
+      <div class="form-group">
+            <label for="supplier" class="col-sm-3 control-label">Supplier</label>
             <div class="col-sm-7">
-                <select id="supplierId" formControlName="supplierId" class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+              <input type="text" class="form-control" id="supplier" formControlName="supplier" placeholder=""> 
             </div>
           </div>
           <div class="form-group">

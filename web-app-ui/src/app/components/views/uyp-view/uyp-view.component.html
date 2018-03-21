@@ -44,7 +44,7 @@
           <th (click)="sort('yarnTypeId')">Yarn Type
             <span class="glyphicon sort-icon" *ngIf="key =='yarnTypeId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
-          <th (click)="sort('yarnCountId')">Yarn Count
+          <th (click)="sort('yarnCountId')">Count
             <span class="glyphicon sort-icon" *ngIf="key =='yarnCountId'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
           <th (click)="sort('supplierId')">Supplier
@@ -68,13 +68,13 @@
             </span>
           </td>
           <td>
-            {{uyp.yarnTypeId}}
+            {{uyp.yarnType.yarnType}}
           </td>
           <td>
-            {{uyp.yarnCountId}}
+            {{uyp.count.count}}
           </td>
           <td>
-            {{uyp.supplierId}}
+            {{uyp.supplier}}
           </td>
           <td>
             {{uyp.purchaseDate | date:'mediumDate'}}

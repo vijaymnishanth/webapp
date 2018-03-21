@@ -20,7 +20,9 @@ export class ViewService {
     this.findAllUYPUrl = AppConfig.endpoints.findAllUYP;
     this.findAllDOUrl = AppConfig.endpoints.findAllDyeingOrder;
     this.findDORByDOIdUrl = AppConfig.endpoints.findDORByDOId;
-    this.headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.headers = new HttpHeaders({'Content-Type': 'application/json',
+    'X-Auth-Token': localStorage.getItem('secureToken')
+  });
    }
 
   private handleError(error: any) {

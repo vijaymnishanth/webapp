@@ -6,4 +6,5 @@ export interface IAppConfig {
     snackBarDuration: number;
     repositoryURL: string;
     endpointsProd: any;
+    localServerURL: string;
   }

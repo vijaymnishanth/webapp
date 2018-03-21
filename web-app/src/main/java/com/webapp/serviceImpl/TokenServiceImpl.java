@@ -83,4 +83,9 @@ public class TokenServiceImpl implements TokenService {
 		calDate.add(Calendar.MINUTE, minutes);
 		return calDate.getTime();
 	}
+
+	@Override
+	public void deleteByUserId(Long userId) {
+		tokenDao.deleteByUserId(userId);		
+	}
 }

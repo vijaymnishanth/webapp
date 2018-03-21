@@ -13,6 +13,7 @@ export class UserService {
 
   private headers: HttpHeaders;
   private loginUrl: string;
+  private logoutUrl: string;
 
   role: string;
 
@@ -20,6 +21,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.loginUrl = AppConfig.endpoints.login;
+    this.logoutUrl = AppConfig.endpoints.logout;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'});
    }
 
@@ -40,7 +42,17 @@ export class UserService {
       }),
    catchError(error => this.handleError(error))); }
 
-       /**
+   logout(): Observable<boolean> {
+     this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
+    return this.http
+    .post(this.logoutUrl, {headers: this.headers}).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+   catchError(error => this.handleError(error))); }
+
+     /**
      * @name isLoggedIn check user login
      * @returns {boolean}
      */

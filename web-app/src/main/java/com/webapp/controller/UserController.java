@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webapp.exception.UserException;
 import com.webapp.model.Token;
 import com.webapp.model.User;
+import com.webapp.service.TokenService;
 import com.webapp.service.UserService;
 
 @RestController
@@ -25,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	TokenService tokenService;
 	
 	@RequestMapping(value = {"/login"}, method = RequestMethod.POST)
     public Token logIn(@RequestBody User user, HttpServletRequest request) throws UserException {
@@ -37,5 +40,13 @@ public class UserController {
     		session.setAttribute("token", token.getTokenKey() + ':' + token.getToken());
     	}
     	return token;
+    }
+	
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.POST)
+    public boolean logout(HttpServletRequest request) throws UserException {
+    	logger.info("Logging in ...");
+    	Long userId = (Long) request.getAttribute("userId");
+    	tokenService.deleteByUserId(userId);
+    	return true;
     }
 }

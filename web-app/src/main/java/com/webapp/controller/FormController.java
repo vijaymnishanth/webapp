@@ -16,6 +16,7 @@ import com.webapp.model.DyeingOrder;
 import com.webapp.model.DyeingOrderReceived;
 import com.webapp.model.Shade;
 import com.webapp.model.UndyedYarnPurchase;
+import com.webapp.model.YarnType;
 import com.webapp.service.DyeingOrderReceivedService;
 import com.webapp.service.DyeingOrderService;
 import com.webapp.service.FormService;
@@ -87,6 +88,12 @@ public class FormController {
 	public List<Count> findAllCount() {
 		logger.info("findAllCount");
 		return formService.findAllCount();
+	}
+	
+	@RequestMapping(value = {"/findAllYarnType"}, method = RequestMethod.GET)
+	public List<YarnType> findAllYarnType() {
+		logger.info("findAllYarnType");
+		return formService.findAllYarnType();
 	}
 	
 	@RequestMapping(value = {"/findDORByDOId"}, method = RequestMethod.POST)

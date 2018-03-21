@@ -21,4 +21,6 @@ public void deleteToken(Long tokenId);
 
 public Token getTokenById(Long tokenId);
 
+public void deleteByUserId(Long userId);
+
 }

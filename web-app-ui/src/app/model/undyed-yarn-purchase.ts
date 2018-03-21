@@ -1,16 +1,18 @@
+import { Count } from './count';
+import { YarnType } from './yarn-type';
 export class UndyedYarnPurchase {
     uypId: number;
-    yarnTypeId: number;
-    yarnCountId: number;
-    supplierId: number;
+    yarnType: YarnType;
+    count: Count;
+    supplier: number;
     purchaseDate: Date;
     quantity: number;
 
     constructor() {
         this.uypId = null;
-        this.yarnCountId = 0;
-        this.yarnTypeId = 0;
-        this.supplierId = 0;
+        this.yarnType = new YarnType();
+        this.count = new Count();
+        this.supplier = null;
         this.purchaseDate = new Date();
         this.quantity = null;
 

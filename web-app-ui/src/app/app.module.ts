@@ -29,6 +29,7 @@ import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/d
 import { RdoViewComponent } from './components/views/rdo-view/rdo-view.component';
 import { DyeingOrderReceivedComponent } from './components/forms/dyeing-order-received/dyeing-order-received.component';
 import { DyeingOrderService } from './service/dyeing-order.service';
+import { LogoutComponent } from './authentication/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DyeingOrderService } from './service/dyeing-order.service';
     DyeingOrderComponent,
     DyeingOrderViewComponent,
     RdoViewComponent,
-    DyeingOrderReceivedComponent
+    DyeingOrderReceivedComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

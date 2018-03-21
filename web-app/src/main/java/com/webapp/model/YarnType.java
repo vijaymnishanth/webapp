@@ -13,7 +13,7 @@ public class YarnType {
 	private Long yarnTypeId;
 	
 	@Column(unique = true)
-	private String yarnTypeName;
+	private String yarnType;
 	
 	private String yarnTypeDesc;
 
@@ -25,12 +25,12 @@ public class YarnType {
 		this.yarnTypeId = yarnTypeId;
 	}
 
-	public String getYarnTypeName() {
-		return yarnTypeName;
+	public String getYarnType() {
+		return yarnType;
 	}
 
-	public void setYarnTypeName(String yarnTypeName) {
-		this.yarnTypeName = yarnTypeName;
+	public void setYarnType(String yarnType) {
+		this.yarnType = yarnType;
 	}
 
 	public String getYarnTypeDesc() {

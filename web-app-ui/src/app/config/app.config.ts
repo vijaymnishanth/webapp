@@ -27,7 +27,9 @@ export const AppConfig: IAppConfig = {
     findSumOfDOR: server + 'api/findSumOfDOR',
     deleteDOR: server + 'api/deleteDOR',
     deleteDyeingOrder: server + 'api/deleteDyeingOrder',
-    countOfDOR: server + 'api/countOfDOR'
+    countOfDOR: server + 'api/countOfDOR',
+    findAllYarnType: server + 'api/findAllYarnType',
+    logout: server + 'api/logout'
   },
   endpointsProd: {
     login: 'api/login',
@@ -40,5 +42,6 @@ export const AppConfig: IAppConfig = {
   votesLimit: 3,
   topHeroesLimit: 4,
   snackBarDuration: 3000,
-  repositoryURL: 'https://github.com/Ismaestro/angular5-example-app'
+  repositoryURL: 'https://github.com/Ismaestro/angular5-example-app',
+  localServerURL: 'http://localhost:8080'
 };

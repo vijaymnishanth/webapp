@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.webapp.exception.UserException;
 import com.webapp.model.Token;
 import com.webapp.model.User;
 import com.webapp.service.TokenService;
@@ -38,11 +39,9 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				+ request.getRequestURI());
 		 boolean isSecure = true;
 		String authToken = extractAuthTokenFromRequest(request);
-		System.out.println(authToken);
+		logger.info("AuthToken: " + authToken);
 		if(authToken!=null) {
 	        String[] parts = authToken.split(":");
-	        
-
 	        if (parts.length == 2) {
 	            String tokenKey = parts[0];
 	            String tokenSecret = parts[1];
@@ -52,6 +51,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	                    if (token != null) {
 	                        if (token.getToken().equals(tokenSecret) && token.getExpired().getTime() > System.currentTimeMillis()) {
 	                            User userDetails = userService.findByUserId(token.getUserId());
+	                            request.setAttribute("userId", token.getUserId());
 	                            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 	                            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 	                            SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -62,6 +62,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	                        else {
 	                        	tokenService.deleteToken(token.getTokenId());
 	                            logger.info("Unable to authenticate the token: " + authToken + ". Incorrect secret or token is expired");
+	                            throw new UserException("Session Expired");
 	                        }
 	                    }
 	                }
