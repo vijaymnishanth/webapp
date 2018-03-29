@@ -43,14 +43,22 @@ export class UserService {
    catchError(error => this.handleError(error))); }
 
    logout(): Observable<boolean> {
-     this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
-    return this.http
-    .post(this.logoutUrl, {headers: this.headers}).pipe(
+     if (this.isLoggedIn()) {
+     const localHeader =  new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token': localStorage.getItem('secureToken')
+    });
+    return this.http.get(this.logoutUrl, {headers: localHeader}).pipe(
       map(response => {
+        this.userLoggedIn.emit(false);
         console.log(response);
         return response;
       }),
-   catchError(error => this.handleError(error))); }
+   catchError(error => this.handleError(error)));
+    } else {
+      return new Observable<false>();
+    }
+  }
 
      /**
      * @name isLoggedIn check user login

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +43,9 @@ public class UserController {
     	return token;
     }
 	
-	@RequestMapping(value = {"/logout"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
     public boolean logout(HttpServletRequest request) throws UserException {
-    	logger.info("Logging in ...");
+    	logger.info("Logging out ...");
     	Long userId = (Long) request.getAttribute("userId");
     	tokenService.deleteByUserId(userId);
     	return true;

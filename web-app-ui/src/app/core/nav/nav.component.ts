@@ -20,8 +20,7 @@ export class NavComponent implements OnInit {
         this.isLoggedIn = userLoggedIn;
       }
     );
-    this.isLoggedIn = true;
-    // this.userService.isLoggedIn();
+    this.isLoggedIn = this.userService.isLoggedIn();
   }
 
   addUYP(): boolean {
