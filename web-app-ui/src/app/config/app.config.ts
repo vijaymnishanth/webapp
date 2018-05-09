@@ -29,7 +29,9 @@ export const AppConfig: IAppConfig = {
     deleteDyeingOrder: server + 'api/deleteDyeingOrder',
     countOfDOR: server + 'api/countOfDOR',
     findAllYarnType: server + 'api/findAllYarnType',
-    logout: server + 'api/logout'
+    logout: server + 'api/logout',
+    saveUYDForm: server + 'api/saveUYDForm',
+    findAllUYD: server + 'api/findAllUYD'
   },
   endpointsProd: {
     login: 'api/login',

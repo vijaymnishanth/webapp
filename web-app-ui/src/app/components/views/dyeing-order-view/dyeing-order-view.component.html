@@ -1,26 +1,32 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <div class="icon-addon addon-lg">
+        <div class="icon-addon addon-md">
           <input type="text" placeholder="Search" class="form-control" [(ngModel)]="search" id="search">
           <label for="search" class="glyphicon glyphicon-search" rel="tooltip" title="search"></label>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="container">
   <div class="table-wrapper">
     <div class="table-title">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <h2>Manage
             <b>Dyeing Order</b>
           </h2>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+            <div class="icon-addon addon-md">
+              <input type="text" placeholder="Search" class="form-control" [(ngModel)]="search" id="search">
+              <label for="search" class="glyphicon glyphicon-search" rel="tooltip" title="search"></label>
+            </div>
+        </div>
+        <div class="col-sm-3">
           <a href="#dyeingOrderModal" (click)="addDyeingOrder()" class="btn btn-success" data-toggle="modal">
             <i class="material-icons">&#xE147;</i>
             <span>Add New</span>
@@ -70,7 +76,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let do of dyeigOrderView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 5, currentPage: page }">
+        <tr *ngFor="let do of dyeigOrderView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 10, currentPage: page }">
           <td>
             <span class="custom-checkbox">
               <input type="checkbox" (click)="selectRecord($event,do.dyeingOrderId)" id="checkbox{{do.dyeingOrderId}}" name="options[]" value="{{do.dyeingOrderId}}">

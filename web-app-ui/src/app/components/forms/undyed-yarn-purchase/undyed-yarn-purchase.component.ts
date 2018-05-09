@@ -47,7 +47,8 @@ export class UndyedYarnPurchaseComponent implements OnInit {
       }),
       supplier: ['', Validators.required],
       purchaseDate: [new Date(), Validators.required],
-      quantity: ['', Validators.required]
+      quantity: ['', Validators.required],
+      challanNo: ['', Validators.required]
     });
   }
 

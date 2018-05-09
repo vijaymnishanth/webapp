@@ -56,13 +56,14 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	                            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 	                            SecurityContextHolder.getContext().setAuthentication(authentication);
 	                            logger.info("Authenticated " + token.getTokenKey());
+	                            if (!request.getRequestURI().equalsIgnoreCase("/web-app/api/logout")) {
 	                            updateLastLogin(token);
+	                            }
 	                            isSecure = true;
 	                        }
 	                        else {
 	                        	tokenService.deleteToken(token.getTokenId());
-	                            logger.info("Unable to authenticate the token: " + authToken + ". Incorrect secret or token is expired");
-	                            throw new UserException("Session Expired");
+	                            logger.info("Unable to authenticate the token: " + authToken + ". Incorrect secret or token is expired");	                            
 	                        }
 	                    }
 	                }
@@ -71,19 +72,21 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	            }
 	        }
 		}
-	        
+		if(!isSecure) {
+			throw new UserException("Session Expired");
+		}
 		return isSecure;
 	}
 
 private void updateLastLogin(final Token token) {
-    Thread updateTokenShread;
-    updateTokenShread = new Thread(new Runnable() {
+    Thread updateTokenThread;
+    updateTokenThread = new Thread(new Runnable() {
         public void run() {
             tokenService.updateLastLoginByCurrentDate(token);
         }
     });
-    updateTokenShread.setName("RESTTokenThread-" + (int)Math.floor(Math.random()*10000));
-    updateTokenShread.start();
+    updateTokenThread.setName("RESTTokenThread-" + (int)Math.floor(Math.random()*10000));
+    updateTokenThread.start();
 
 }
 

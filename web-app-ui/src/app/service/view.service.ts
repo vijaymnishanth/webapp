@@ -8,6 +8,7 @@ import 'rxjs/add/observable/throw';
 
 import {UndyedYarnPurchase} from '../model/undyed-yarn-purchase';
 import {AppConfig} from '../config/app.config';
+import { UndyedYarnDyeing } from '../model/undyed-yarn-dyeing';
 @Injectable()
 export class ViewService {
 
@@ -15,13 +16,14 @@ export class ViewService {
   private findAllUYPUrl: string;
   private findAllDOUrl: string;
   private findDORByDOIdUrl: string;
+  private findAllUYDUrl: string;
 
   constructor(private http: HttpClient) {
     this.findAllUYPUrl = AppConfig.endpoints.findAllUYP;
     this.findAllDOUrl = AppConfig.endpoints.findAllDyeingOrder;
     this.findDORByDOIdUrl = AppConfig.endpoints.findDORByDOId;
-    this.headers = new HttpHeaders({'Content-Type': 'application/json',
-    'X-Auth-Token': localStorage.getItem('secureToken')
+    this.findAllUYDUrl = AppConfig.endpoints.findAllUYD;
+    this.headers = new HttpHeaders({'Content-Type': 'application/json'
   });
    }
 
@@ -33,6 +35,7 @@ export class ViewService {
   }
 
   findAllUYP(): Observable<UndyedYarnPurchase[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
     .get(this.findAllUYPUrl , {headers: this.headers}).pipe(
       map(response => {
@@ -51,8 +54,19 @@ export class ViewService {
   }
 
   findDORByDOId(dyeingOrderId: number): Observable<DyeingOrderReceived[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
     .post(this.findDORByDOIdUrl , dyeingOrderId, {headers: this.headers}).pipe(
+      map(response => {
+        return response;
+      }),
+   catchError(error => this.handleError(error)));
+  }
+
+  findAllUYD(): Observable<UndyedYarnDyeing[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
+    return this.http
+    .get(this.findAllUYDUrl , {headers: this.headers}).pipe(
       map(response => {
         return response;
       }),

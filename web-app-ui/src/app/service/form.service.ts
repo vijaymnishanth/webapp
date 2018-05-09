@@ -36,8 +36,7 @@ export class FormService {
     this.findAllCountUrl = AppConfig.endpoints.findAllCount;
     this.findAllYarnTypeUrl = AppConfig.endpoints.findAllYarnType;
     this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Auth-Token': localStorage.getItem('secureToken')
+      'Content-Type': 'application/json'
     });
   }
 
@@ -49,7 +48,7 @@ export class FormService {
   }
 
   saveUYPForm(undyedYarnPurchase: UndyedYarnPurchase): Observable<UndyedYarnPurchase> {
-
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.saveUYPUrl, undyedYarnPurchase, { headers: this.headers }).pipe(
         map(response => {
@@ -62,6 +61,7 @@ export class FormService {
   }
 
   findByUYPId(uypId: number): Observable<UndyedYarnPurchase> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.findByUYPIdUrl, uypId, { headers: this.headers }).pipe(
         map(response => {
@@ -71,13 +71,14 @@ export class FormService {
   }
 
   deleteUYP(uypId: number[]) {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.deleteUYPUrl, uypId, { headers: this.headers }).pipe(
         catchError(error => this.handleError(error)));
   }
 
   searchByShadeNo(shadeNo: String): Observable<Shade[]> {
-
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.searchByShadeNoUrl, shadeNo, { headers: this.headers }).pipe(
         map(response => {
@@ -89,6 +90,7 @@ export class FormService {
   }
 
   findAllCount(): Observable<Count[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .get(this.findAllCountUrl, { headers: this.headers }).pipe(
         map(response => {
@@ -98,6 +100,7 @@ export class FormService {
   }
 
   findAllYarnType(): Observable<YarnType[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .get(this.findAllYarnTypeUrl, { headers: this.headers }).pipe(
         map(response => {

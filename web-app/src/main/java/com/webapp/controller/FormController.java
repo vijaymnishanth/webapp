@@ -15,11 +15,13 @@ import com.webapp.model.Count;
 import com.webapp.model.DyeingOrder;
 import com.webapp.model.DyeingOrderReceived;
 import com.webapp.model.Shade;
+import com.webapp.model.UndyedYarnDyeing;
 import com.webapp.model.UndyedYarnPurchase;
 import com.webapp.model.YarnType;
 import com.webapp.service.DyeingOrderReceivedService;
 import com.webapp.service.DyeingOrderService;
 import com.webapp.service.FormService;
+import com.webapp.service.UndyedYarnDyeingService;
 import com.webapp.service.UndyedYarnPurchaseService;
 
 @RestController
@@ -38,6 +40,9 @@ public class FormController {
 	
 	@Autowired
 	DyeingOrderReceivedService dyeingOrderReceivedService;
+	
+	@Autowired
+	UndyedYarnDyeingService undyedYarnDyeingService;
 	
 	static final Logger logger = Logger.getLogger(FormController.class); 
 
@@ -130,5 +135,17 @@ public class FormController {
 	public Long countOfDOR(@RequestBody List<Long> dyeingOrderId) {
 		logger.info("countOfDOR");
 		return dyeingOrderReceivedService.countOfDOR(dyeingOrderId);
+	}
+	
+	@RequestMapping(value = {"/saveUYDForm"}, method = RequestMethod.POST)
+	public UndyedYarnDyeing saveUYDForm(@RequestBody UndyedYarnDyeing undyedYarnDyeing) {
+		logger.info("saveUYPForm");
+		return undyedYarnDyeingService.saveUYP(undyedYarnDyeing);
+	}
+	
+	@RequestMapping(value = {"/findAllUYD"}, method = RequestMethod.GET)
+	public List<UndyedYarnDyeing> findAllUYD() {
+		logger.info("findAllUYP");
+		return undyedYarnDyeingService.findAllUYD();
 	}
 }

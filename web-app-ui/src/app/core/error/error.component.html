@@ -8,6 +8,7 @@
             </div>
             <div class="modal-body">
                 <p>{{ error?.message }}</p>
+                <p id='message'>Click <a routerLink="/signin" (click)="loggedOut()">here</a> to login again</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" (click)="onErrorHandled()">Close</button>

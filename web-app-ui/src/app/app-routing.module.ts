@@ -1,3 +1,4 @@
+import { UydViewComponent } from './components/views/uyd-view/uyd-view.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { RdoViewComponent } from './components/views/rdo-view/rdo-view.component';
 import { NgModule } from '@angular/core';
@@ -16,14 +17,14 @@ import { DyeingOrderViewComponent } from './components/views/dyeing-order-view/d
 const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'signin', component: SignInComponent},
-  {path: 'uypForm', component: UndyedYarnPurchaseComponent},
+  {path: 'uypForm', component: UndyedYarnPurchaseComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'dyeingOrderForm', component: DyeingOrderComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'uypView', component: UypViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'dyeingOrderView', component: DyeingOrderViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'receivedDyeingOrderView', component: RdoViewComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'logout', component: LogoutComponent, canActivate: [LoggedInAuthGuard]},
-  {path: AppConfig.routes.home, component: HomeComponent, canActivate: [LoggedInAuthGuard]
-}
+  {path: AppConfig.routes.home, component: HomeComponent, canActivate: [LoggedInAuthGuard]},
+  {path: 'uydView', component: UydViewComponent, canActivate: [LoggedInAuthGuard]}
 ];
 
 @NgModule({

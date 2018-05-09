@@ -34,6 +34,8 @@ public class UndyedYarnPurchase {
 	
 	private Long quantity;
 	
+	private String challanNo;
+	
 	public Long getUypId() {
 		return uypId;
 	}
@@ -71,7 +73,12 @@ public class UndyedYarnPurchase {
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+	public String getChallanNo() {
+		return challanNo;
+	}
+	public void setChallanNo(String challanNo) {
+		this.challanNo = challanNo;
+	}
+		
 	
 }

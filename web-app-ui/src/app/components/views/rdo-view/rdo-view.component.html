@@ -1,12 +1,12 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <b>Dyeing Order Details</b>
-      <a href="#dyeingOrderModal" (click)="editDyeingOrder()" class="btn-sm btn-default pull-right" data-toggle="modal">
+      <b>Dyeing Order Header</b>
+      <!-- <a href="#dyeingOrderModal" (click)="editDyeingOrder()" class="btn-sm btn-default pull-right" data-toggle="modal">
         <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
-      </a>
+      </a> -->
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="font-size: 16px;">
       <div class="col-sm-12">
         <label class="col-sm-2 control-label">Order No:</label>
         <span class="col-sm-2">{{dyeingOrder.dyeingOrderNo}}</span>
@@ -28,8 +28,12 @@
         <span class="col-sm-2">{{dyeingOrder.quantity}}</span>
         <label class="col-sm-2 control-label">Colour:</label>
         <span class="col-sm-2">{{dyeingOrder.shade.shadeColour}}</span>
-        <label class="col-sm-2 control-label">Balance:</label>
-        <span class="col-sm-2">{{balanceOrderQuantity}}</span>
+        <label class="col-sm-2 control-label" style="
+        color: red;">Balance:</label>
+        <span class="col-sm-2" style="
+        color: red;
+        font-weight:  bold;
+    ">{{balanceOrderQuantity}}</span>
       </div>
     </div>
   </div>
@@ -73,11 +77,11 @@
             <th (click)="sort('dyeingChallanNo')">Dyeing Challan No
               <span class="glyphicon sort-icon" *ngIf="key =='dyeingChallanNo'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
-            <th>Actions</th>
+            <!-- <th>Actions</th> -->
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dor of dorView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 3, currentPage: page }">
+          <tr *ngFor="let dor of dorView | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: 5, currentPage: page }">
             <td>
               <span class="custom-checkbox">
                 <input type="checkbox" (click)="selectRecord($event,dor.dorId)" id="checkbox{{dor.dorId}}" name="options[]" value="{{dor.dorId}}">
@@ -93,14 +97,14 @@
             <td>
               {{dor.dyeingChallanNo}}
             </td>
-            <td>
+            <!-- <td>
               <a href="#addEditDORModal" (click)="editDyeingOrderReceived(dor)" class="edit" data-toggle="modal">
                 <i class="material-icons" data-toggle="tooltip" tooltip="Edit">&#xE254;</i>
               </a>
               <a href="#deleteDORModal" (click)="deleteDORById(dor.dorId)" class="delete" data-toggle="modal">
                 <i class="material-icons" data-toggle="tooltip" tooltip="Delete">&#xE872;</i>
               </a>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>

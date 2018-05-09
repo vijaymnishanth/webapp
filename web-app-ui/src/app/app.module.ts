@@ -30,6 +30,9 @@ import { RdoViewComponent } from './components/views/rdo-view/rdo-view.component
 import { DyeingOrderReceivedComponent } from './components/forms/dyeing-order-received/dyeing-order-received.component';
 import { DyeingOrderService } from './service/dyeing-order.service';
 import { LogoutComponent } from './authentication/logout/logout.component';
+import { UndyedYarnDyeingComponent } from './components/forms/undyed-yarn-dyeing/undyed-yarn-dyeing.component';
+import { UndyedYarnDyeingService } from './service/undyed-yarn-dyeing.service';
+import { UydViewComponent } from './components/views/uyd-view/uyd-view.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { LogoutComponent } from './authentication/logout/logout.component';
     DyeingOrderViewComponent,
     RdoViewComponent,
     DyeingOrderReceivedComponent,
-    LogoutComponent
+    LogoutComponent,
+    UndyedYarnDyeingComponent,
+    UydViewComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import { LogoutComponent } from './authentication/logout/logout.component';
     BrowserAnimationsModule
   ],
   providers: [TestService, UserService, LoggerService,
-     LoggedInAuthGuard, ErrorService, FormService, ViewService, MatSnackBarModule, DyeingOrderService],
+     LoggedInAuthGuard, ErrorService, FormService, ViewService, MatSnackBarModule, DyeingOrderService, UndyedYarnDyeingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

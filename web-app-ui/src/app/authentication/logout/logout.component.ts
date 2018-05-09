@@ -17,6 +17,7 @@ export class LogoutComponent implements OnInit {
     this.userService.logout().subscribe((loggedout) => {
       this.logout();
     }, (error: Response) => {
+        this.logout();
         LoggerService.error('Login Error', error);
         this.logError(error);
      });

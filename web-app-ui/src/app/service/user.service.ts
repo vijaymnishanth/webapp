@@ -48,9 +48,9 @@ export class UserService {
       'Content-Type': 'application/json',
       'X-Auth-Token': localStorage.getItem('secureToken')
     });
+    this.userLoggedIn.emit(false);
     return this.http.get(this.logoutUrl, {headers: localHeader}).pipe(
       map(response => {
-        this.userLoggedIn.emit(false);
         console.log(response);
         return response;
       }),

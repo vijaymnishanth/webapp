@@ -38,12 +38,12 @@ export class DyeingOrderService {
     this.deleteDOUrl = AppConfig.endpoints.deleteDyeingOrder;
     this.countOfDORUrl = AppConfig.endpoints.countOfDOR;
     this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Auth-Token': localStorage.getItem('secureToken')
+      'Content-Type': 'application/json'
     });
   }
 
   saveDOForm(dyeingOrder: DyeingOrder): Observable<DyeingOrder> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.saveDOUrl, dyeingOrder, { headers: this.headers }).pipe(
         map(response => {
@@ -54,6 +54,7 @@ export class DyeingOrderService {
   }
 
   saveDORForm(dyeingOrderReceived: DyeingOrderReceived): Observable<DyeingOrderReceived[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.saveDORFormUrl, dyeingOrderReceived, { headers: this.headers }).pipe(
         map(response => {
@@ -65,6 +66,7 @@ export class DyeingOrderService {
   }
 
   findSumOfDOR(dyeingOrderId: number): Observable<number> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.findSumOfDORUrl, dyeingOrderId, { headers: this.headers }).pipe(
         map(response => {
@@ -74,6 +76,7 @@ export class DyeingOrderService {
   }
 
   deleteDOR(dorId: number[]) {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.deleteDORUrl, dorId, { headers: this.headers }).pipe(
         map(response => {
@@ -83,6 +86,7 @@ export class DyeingOrderService {
   }
 
   deleteDyeingOrder(dyeingOrderId: number[]) {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.deleteDOUrl, dyeingOrderId, { headers: this.headers }).pipe(
         map(response => {
@@ -92,6 +96,7 @@ export class DyeingOrderService {
   }
 
   countOfDOR(dyeingOrderId: number[]): Observable<number> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
       .post(this.countOfDORUrl, dyeingOrderId, { headers: this.headers }).pipe(
         map(response => {
