@@ -20,6 +20,7 @@ export const AppConfig: IAppConfig = {
     deleteUYP: server + 'api/deleteUYP',
     saveDyeingOrder: server + 'api/saveDyeingOrderForm',
     findAllDyeingOrder: server + 'api/findAllDyeingOrder',
+    findAllDyeingOrderSummary: server + 'api/findAllDyeingOrderSummary',
     searchByShadeNo: server + 'api/searchByShadeNo',
     findAllCount: server + 'api/findAllCount',
     findDORByDOId: server + 'api/findDORByDOId',

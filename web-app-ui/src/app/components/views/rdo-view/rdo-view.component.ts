@@ -1,3 +1,4 @@
+import { DyeingOrderSummary } from './../../../model/dyeing-order-summary';
 import { ErrorService } from './../../../service/error.service';
 import { LoggerService } from './../../../core/logger.service';
 import { Router } from '@angular/router';

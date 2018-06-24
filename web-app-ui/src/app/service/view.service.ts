@@ -1,3 +1,4 @@
+import { DyeingOrderSummary } from './../model/dyeing-order-summary';
 import { DyeingOrderReceived } from './../model/dyeing-order-received';
 import { DyeingOrder } from './../model/dyeing-order';
 import { Injectable } from '@angular/core';
@@ -15,12 +16,14 @@ export class ViewService {
   private headers: HttpHeaders;
   private findAllUYPUrl: string;
   private findAllDOUrl: string;
+  private findAllDOSummaryUrl: string;
   private findDORByDOIdUrl: string;
   private findAllUYDUrl: string;
 
   constructor(private http: HttpClient) {
     this.findAllUYPUrl = AppConfig.endpoints.findAllUYP;
     this.findAllDOUrl = AppConfig.endpoints.findAllDyeingOrder;
+    this.findAllDOSummaryUrl = AppConfig.endpoints.findAllDyeingOrderSummary;
     this.findDORByDOIdUrl = AppConfig.endpoints.findDORByDOId;
     this.findAllUYDUrl = AppConfig.endpoints.findAllUYD;
     this.headers = new HttpHeaders({'Content-Type': 'application/json'
@@ -45,8 +48,19 @@ export class ViewService {
   }
 
   findAllDyeingOrder(): Observable<DyeingOrder[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
     return this.http
     .get(this.findAllDOUrl , {headers: this.headers}).pipe(
+      map(response => {
+        return response;
+      }),
+   catchError(error => this.handleError(error)));
+  }
+
+  findAllDyeingOrderSummary(): Observable<DyeingOrderSummary[]> {
+    this.headers.append('X-Auth-Token', localStorage.getItem('secureToken'));
+    return this.http
+    .get(this.findAllDOSummaryUrl , {headers: this.headers}).pipe(
       map(response => {
         return response;
       }),

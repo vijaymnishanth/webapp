@@ -1,3 +1,4 @@
+import { DyeingOrderSummary } from './../model/dyeing-order-summary';
 import { DyeingOrderReceived } from './../model/dyeing-order-received';
 import { DyeingOrder } from './../model/dyeing-order';
 import { Injectable, EventEmitter } from '@angular/core';

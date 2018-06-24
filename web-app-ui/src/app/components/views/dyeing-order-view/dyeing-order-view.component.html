@@ -72,6 +72,12 @@
           <th (click)="sort('customer')">Customer
             <span class="glyphicon sort-icon" *ngIf="key =='customer'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
           </th>
+          <th (click)="sort('received')">Received
+            <span class="glyphicon sort-icon" *ngIf="key =='received'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th (click)="sort('balance')">Balance
+            <span class="glyphicon sort-icon" *ngIf="key =='balance'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -90,13 +96,13 @@
             {{do.orderDate | date:'mediumDate'}}
           </td>
           <td>
-            {{do.shade.shadeNo}}
+            {{do.shadeNo}}
           </td>
           <td>
-            {{do.shade.shadeColour}}
+            {{do.shadeColour}}
           </td>
           <td>
-            {{do.count.count}}
+            {{do.count}}
           </td>
           <td>
             {{do.description}}
@@ -106,6 +112,12 @@
           </td>
           <td>
             {{do.customer}}
+          </td>
+          <td>
+            {{do.received}}
+          </td>
+          <td>
+            {{do.balance}}
           </td>
           <td>
             <a routerLink ="/receivedDyeingOrderView" (click)="editDyeingOrder(do)" class="edit">

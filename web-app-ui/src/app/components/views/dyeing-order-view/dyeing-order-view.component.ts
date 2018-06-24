@@ -1,3 +1,5 @@
+import { Shade } from './../../../model/shade';
+import { DyeingOrderSummary } from './../../../model/dyeing-order-summary';
 import { DyeingOrderService } from './../../../service/dyeing-order.service';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -18,7 +20,7 @@ declare var $: any;
 })
 export class DyeingOrderViewComponent implements OnInit {
 
-  dyeigOrderView: DyeingOrder[];
+  dyeigOrderView: DyeingOrderSummary[];
   search: string;
   dyeingOrder: DyeingOrder;
   key = 'dyeingOrderNo'; // set default
@@ -43,7 +45,7 @@ export class DyeingOrderViewComponent implements OnInit {
   }
 
   loadDyeingOrderDetails() {
-    this.viewService.findAllDyeingOrder().subscribe((data) => {
+    this.viewService.findAllDyeingOrderSummary().subscribe((data) => {
       this.dyeigOrderView = data;
       LoggerService.log(this.dyeigOrderView);
     }, (error: Response) => {
@@ -58,7 +60,18 @@ export class DyeingOrderViewComponent implements OnInit {
     return true;
   }
 
-  editDyeingOrder(dyeingOrder: DyeingOrder): boolean {
+  editDyeingOrder(dyeingOrderSummary: DyeingOrderSummary): boolean {
+    const dyeingOrder = new DyeingOrder;
+    dyeingOrder.dyeingOrderId = dyeingOrderSummary.dyeingOrderId;
+    dyeingOrder.dyeingOrderNo = dyeingOrderSummary.dyeingOrderNo;
+    dyeingOrder.description = dyeingOrderSummary.description;
+    dyeingOrder.count.countId = dyeingOrderSummary.countId;
+    dyeingOrder.count.count = dyeingOrderSummary.count;
+    dyeingOrder.shade.shadeId = dyeingOrderSummary.shadeId;
+    dyeingOrder.shade.shadeNo = dyeingOrderSummary.shadeNo;
+    dyeingOrder.shade.shadeColour = dyeingOrderSummary.shadeColour;
+    dyeingOrder.customer = dyeingOrderSummary.customer;
+    dyeingOrder.quantity = dyeingOrderSummary.quantity;
     this.dyeingOrderService.dyeingOrder = dyeingOrder;
     return true;
   }

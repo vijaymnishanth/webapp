@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webapp.model.Count;
 import com.webapp.model.DyeingOrder;
 import com.webapp.model.DyeingOrderReceived;
+import com.webapp.model.DyeingOrderSummary;
 import com.webapp.model.Shade;
 import com.webapp.model.UndyedYarnDyeing;
 import com.webapp.model.UndyedYarnPurchase;
@@ -81,6 +82,12 @@ public class FormController {
 	public List<DyeingOrder> findAllDyeingOrder() {
 		logger.info("findAllDyeingOrder");
 		return dyeingOrderService.findAllDyeingOrder();
+	}
+	
+	@RequestMapping(value = {"/findAllDyeingOrderSummary"}, method = RequestMethod.GET)
+	public List<DyeingOrderSummary> findAllDyeingOrderSummary() {
+		logger.info("findAllDyeingOrderSummary");
+		return dyeingOrderService.findAllDyeingOrderSummary();
 	}
 	
 	@RequestMapping(value = {"/searchByShadeNo"}, method = RequestMethod.POST)
